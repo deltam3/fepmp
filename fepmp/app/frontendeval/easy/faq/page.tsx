@@ -1,6 +1,10 @@
-import React from "react";
+"use client";
 
-const page = () => {
+import React, { useState } from "react";
+
+const Page = () => {
+  const [whatOpen, setWhatOpen] = useState(false);
+
   return (
     <div>
       <p>FAQ</p>
@@ -8,4 +12,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
