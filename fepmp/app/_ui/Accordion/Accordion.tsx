@@ -76,3 +76,27 @@
 // };
 
 // export default Accordion;
+
+"use client";
+
+import { createContext, useContext, useState } from "react";
+
+const AccordionContext = createContext(null);
+
+function Accordion({ children }) {
+  const [activeIndex, setActiveIndex] = useState<null | number>(null);
+
+  const handleItemClick = (index: number | null) => {
+    setActiveIndex((prevIndex) => (prevIndex === index ? null : index));
+  };
+
+  return (
+    <AccordionContext.Provider
+      value={{ activeIndex, setActiveIndex, handleItemClick }}
+    >
+      <span>{children}</span>
+    </AccordionContext.Provider>
+  );
+}
+
+export default Accordion;
