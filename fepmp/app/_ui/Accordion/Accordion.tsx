@@ -93,8 +93,7 @@ const AccordionContext = createContext<AccordionContextType>({
 
 interface AccordionProps {
   children: ReactNode;
-  // AccordionItem: ReactNode;
-  AccordionItem: React.FunctionComponent<AccordionItemProps>;
+  AccordionItem?: React.FunctionComponent<AccordionItemProps>;
 }
 
 const Accordion: React.FC<AccordionProps> & {
