@@ -86,7 +86,7 @@ interface AccordionContextType {
   handleItemClick: (index: number) => void;
 }
 
-const AccordionContext = createContext<AccordionContextType>({
+const AccordionContext = createContext<AccordionContextType | null>({
   activeIndex: null,
   handleItemClick: () => {},
 });
