@@ -3,7 +3,12 @@
 import React, { useState } from "react";
 import Accordion from "@/app/_ui/Accordion/Accordion";
 
-const data = [
+export type AccordionItemData = {
+  question: string;
+  answer: string;
+};
+
+const data: Array<AccordionItemData> = [
   {
     question: "How many bones does a cat have?",
     answer: "A cat has 230 bones - 6 more than a human",

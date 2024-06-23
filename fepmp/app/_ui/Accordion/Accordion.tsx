@@ -79,11 +79,27 @@
 
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, ReactNode } from "react";
 
-const AccordionContext = createContext(null);
+interface AccordionContextType {
+  activeIndex: number | null;
+  handleItemClick: (index: number) => void;
+}
 
-function Accordion({ children }) {
+const AccordionContext = createContext<AccordionContextType>({
+  activeIndex: null,
+  handleItemClick: () => {},
+});
+
+interface AccordionProps {
+  children: ReactNode;
+  // AccordionItem: ReactNode;
+  AccordionItem: React.FunctionComponent<AccordionItemProps>;
+}
+
+const Accordion: React.FC<AccordionProps> & {
+  AccordionItem: React.FC<AccordionItemProps>;
+} = ({ children }) => {
   const [activeIndex, setActiveIndex] = useState<null | number>(null);
 
   const handleItemClick = (index: number | null) => {
@@ -91,24 +107,28 @@ function Accordion({ children }) {
   };
 
   return (
-    <AccordionContext.Provider
-      value={{ activeIndex, setActiveIndex, handleItemClick }}
-    >
+    <AccordionContext.Provider value={{ activeIndex, handleItemClick }}>
       <span>{children}</span>
     </AccordionContext.Provider>
   );
-}
+};
 
-function AccordionItem({ item, index }) {
-  const { activeIndex, setActiveIndex, handleItemClick } =
-    useContext(AccordionContext);
+import { AccordionItemData } from "@/app/frontendeval/easy/faq/page";
+
+type AccordionItemProps = {
+  item: AccordionItemData;
+  index: number;
+};
+
+const AccordionItem: React.FC<AccordionItemProps> = ({ item, index }) => {
+  const { activeIndex, handleItemClick } = useContext(AccordionContext);
   return (
     <div onClick={() => handleItemClick(index)}>
       <p>{item.question}</p>
       {activeIndex === index && <p>{item.answer}</p>}
     </div>
   );
-}
+};
 
 Accordion.AccordionItem = AccordionItem;
 
