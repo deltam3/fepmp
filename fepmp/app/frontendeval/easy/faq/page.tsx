@@ -20,14 +20,19 @@ const data = [
 ];
 
 const Page = () => {
-  const [whatOpen, setWhatOpen] = useState(false);
-
   return (
     <div>
       <p>FAQ</p>
-      {/* <Accordion data={data} /> */}
       <Accordion>
-        <Accordion.AccordionItem item={data[0]}></Accordion.AccordionItem>
+        {data.map((aData, index) => {
+          return (
+            <Accordion.AccordionItem
+              item={aData}
+              index={index}
+              key={aData.question}
+            />
+          );
+        })}
       </Accordion>
     </div>
   );

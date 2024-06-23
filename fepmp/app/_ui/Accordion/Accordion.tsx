@@ -99,12 +99,14 @@ function Accordion({ children }) {
   );
 }
 
-function AccordionItem({ item }) {
+function AccordionItem({ item, index }) {
+  const { activeIndex, setActiveIndex, handleItemClick } =
+    useContext(AccordionContext);
   return (
-    <>
+    <div onClick={() => handleItemClick(index)}>
       <p>{item.question}</p>
-      <p>{item.answer}</p>
-    </>
+      {activeIndex === index && <p>{item.answer}</p>}
+    </div>
   );
 }
 
