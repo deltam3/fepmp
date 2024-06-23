@@ -99,4 +99,15 @@ function Accordion({ children }) {
   );
 }
 
+function AccordionItem({ item }) {
+  return (
+    <>
+      <p>{item.question}</p>
+      <p>{item.answer}</p>
+    </>
+  );
+}
+
+Accordion.AccordionItem = AccordionItem;
+
 export default Accordion;

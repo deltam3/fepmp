@@ -5,24 +5,17 @@ import Accordion from "@/app/_ui/Accordion/Accordion";
 
 const data = [
   {
-    question: "What are accordion components?",
-    answer:
-      "Accordion components are user interface elements used for organizing and presenting content in a collapsible manner. They typically consist of a header, content, and an expand/collapse action.",
+    question: "How many bones does a cat have?",
+    answer: "A cat has 230 bones - 6 more than a human",
   },
   {
-    question: "What are they use for?",
-    answer:
-      "They are commonly employed in various contexts, including FAQs, product descriptions, navigation menus, settings panels, and data tables, to save screen space and provide a structured and user-friendly interface for presenting information or options.",
+    question: "How much do cats sleep?",
+    answer: "The average cat sleeps 12-16 hours per day",
   },
   {
-    question: "Accordion as a musical instrument",
+    question: "How long do cats live",
     answer:
-      "The accordion is a musical instrument with a keyboard and bellows. It produces sound by air passing over reeds when the player expands or compresses the bellows, used in various music genres.",
-  },
-  {
-    question: "Can i create an accordion component with a different framework?",
-    answer:
-      "Yes of course, it is very possible to create an accordion component with another framework.",
+      "Outdoor cats live 5 years on average. Indoor\ncats live 15 years on average.",
   },
 ];
 
@@ -32,7 +25,10 @@ const Page = () => {
   return (
     <div>
       <p>FAQ</p>
-      <Accordion data={data} />
+      {/* <Accordion data={data} /> */}
+      <Accordion>
+        <Accordion.AccordionItem item={data[0]}></Accordion.AccordionItem>
+      </Accordion>
     </div>
   );
 };
