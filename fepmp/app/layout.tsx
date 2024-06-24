@@ -1,3 +1,4 @@
+import StyledComponentsRegistry from "@/lib/registry";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
@@ -19,10 +20,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Header />
-        <div>
-          <main>{children}</main>
-        </div>
+        <StyledComponentsRegistry>
+          <Header />
+          <div>
+            <main>{children}</main>
+          </div>
+        </StyledComponentsRegistry>
       </body>
     </html>
   );
