@@ -1,16 +1,20 @@
+"use client";
+
 import StyledComponentsRegistry from "@/lib/registry";
-import type { Metadata } from "next";
+import GlobalStyles from "./_styles/GlobalStyles";
+
 import { Inter } from "next/font/google";
 
-import "@/app/_styles/globals.css";
+// import "@/app/_styles/globals.css";
 import Header from "./_components/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "Practice makes Perfect",
-  description: "NextJS App to showoff my frontend skills",
-};
+// import type { Metadata } from "next";
+// export const metadata: Metadata = {
+//   title: "Practice makes Perfect",
+//   description: "NextJS App to showoff my frontend skills",
+// };
 
 export default function RootLayout({
   children,
@@ -21,6 +25,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <StyledComponentsRegistry>
+          <GlobalStyles />
           <Header />
           <div>
             <main>{children}</main>
