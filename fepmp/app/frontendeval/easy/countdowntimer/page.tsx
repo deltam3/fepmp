@@ -14,13 +14,15 @@ const Page = () => {
         <Input placeholder="MM" />
         <span>:</span>
         <Input placeholder="SS" />
-        {isStart ? (
-          <div>
-            <Button>Pause</Button> <Button>Reset</Button>
-          </div>
-        ) : (
-          <Button onClick={() => setIsStart(true)}>Start</Button>
-        )}
+        <span>
+          {isStart ? (
+            <>
+              <Button>Pause</Button> <Button>Reset</Button>
+            </>
+          ) : (
+            <Button onClick={() => setIsStart(true)}>Start</Button>
+          )}
+        </span>
       </div>
     </div>
   );
