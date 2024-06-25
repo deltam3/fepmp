@@ -12,20 +12,32 @@ const Page = () => {
 
   const hoursHandler = (e: ChangeEvent<HTMLInputElement>) => {
     let newValue: number = parseInt(e.target.value);
-    if (isNaN(newValue)) newValue = 0;
-    setHours(newValue);
+
+    if (isNaN(newValue)) {
+      setHours(0);
+    } else {
+      setHours(newValue);
+    }
   };
 
   const minutesHandler = (e: ChangeEvent<HTMLInputElement>) => {
     let newValue: number = parseInt(e.target.value);
-    if (isNaN(newValue)) newValue = 0;
-    setMinutes(newValue);
+
+    if (isNaN(newValue)) {
+      setMinutes(0);
+    } else {
+      setMinutes(newValue);
+    }
   };
 
   const secondsHandler = (e: ChangeEvent<HTMLInputElement>) => {
     let newValue: number = parseInt(e.target.value);
-    if (isNaN(newValue)) newValue = 0;
-    setSeconds(newValue);
+
+    if (isNaN(newValue)) {
+      setSeconds(0);
+    } else {
+      setSeconds(newValue);
+    }
   };
 
   return (
