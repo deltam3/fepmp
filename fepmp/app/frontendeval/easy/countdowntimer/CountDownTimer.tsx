@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import BeforeStartTimer from "./BeforeStartTimer";
 import AfterStartTimer from "./AfterStartTimer";
@@ -12,59 +12,45 @@ export type TimeType = {
 const CountDownTimer = () => {
   const [isStart, setIsStart] = useState<boolean>(false);
 
-  const [initialHours, setInitialHours] = useState<number | "HH">("HH");
-  const [initialMinutes, setInitialMinutes] = useState<number | "MM">("MM");
-  const [initialSeconds, setInitialSeconds] = useState<number | "SS">("SS");
+  const initialHours = useRef(0);
+  const initialMinutes = useRef(0);
+  const initialSeconds = useRef(0);
 
-  const [remainingHours, setRemainingHours] = useState<number | "HH">(
-    initialHours
-  );
-  const [remainingMinutes, setRemainingMinutes] = useState<number | "MM">(
-    initialMinutes
-  );
-  const [remainingSeconds, setRemainingSeconds] = useState<number | "SS">(
-    initialSeconds
-  );
+  const [remainingTime, setRemainingTime] = useState({
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
   useEffect(() => {
     const interval = setInterval(() => {
       if (
-        remainingHours === 0 &&
-        remainingMinutes === 0 &&
-        remainingSeconds === 0
+        remainingTime.hours === 0 &&
+        remainingTime.minutes === 0 &&
+        remainingTime.seconds === 0
       ) {
         clearInterval(interval);
       } else {
-        if (typeof remainingSeconds === "number") {
-          if (remainingSeconds > 0) {
-            setRemainingSeconds((prevSeconds: any) => prevSeconds - 1);
-          }
+        if (remainingTime.seconds > 0) {
+          setRemainingTime((prevTime) => ({
+            ...prevTime,
+            seconds: prevTime.seconds - 1,
+          }));
         } else {
-          if (typeof remainingMinutes === "number") {
-            if (remainingMinutes > 0) {
-              // setRemainingTime((prevTime) => ({
-              //   ...prevTime,
-              //   minutes: prevTime.minutes - 1,
-              //   seconds: 59,
-              // }));
-              setRemainingMinutes((prevMinutes: any) => prevMinutes - 1);
-              setRemainingSeconds(59);
-            }
+          if (remainingTime.minutes > 0) {
+            setRemainingTime((prevTime) => ({
+              ...prevTime,
+              minutes: prevTime.minutes - 1,
+              seconds: 59,
+            }));
           } else {
-            // if (remainingTime.hours > 0) {
-            //   setRemainingTime((prevTime) => ({
-            //     ...prevTime,
-            //     hours: prevTime.hours - 1,
-            //     minutes: 59,
-            //     seconds: 59,
-            //   }));
-            // }
-            if (typeof remainingHours === "number") {
-              if (remainingHours > 0) {
-                setRemainingHours((prevHours: any) => prevHours - 1);
-                setRemainingMinutes((prevMinutes: any) => 59);
-                setRemainingSeconds((prevSeconds: any) => 59);
-              }
+            if (remainingTime.hours > 0) {
+              setRemainingTime((prevTime) => ({
+                ...prevTime,
+                hours: prevTime.hours - 1,
+                minutes: 59,
+                seconds: 59,
+              }));
             }
           }
         }
@@ -72,26 +58,31 @@ const CountDownTimer = () => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [remainingHours, remainingMinutes, remainingSeconds]);
+  }, [remainingTime]);
+
+  const submitTimeHandler = () => {
+    setIsStart(true);
+    setRemainingTime({
+      hours: initialHours.current,
+      minutes: initialMinutes.current,
+      seconds: initialSeconds.current,
+    });
+  };
 
   return (
     <div>
       {isStart ? (
         <AfterStartTimer
-          remainingHours={remainingHours}
-          remainingMinutes={remainingMinutes}
-          remainingSeconds={remainingSeconds}
+          remainingHours={remainingTime.hours}
+          remainingMinutes={remainingTime.minutes}
+          remainingSeconds={remainingTime.seconds}
         />
       ) : (
         <BeforeStartTimer
-          isStart={isStart}
-          setIsStart={setIsStart}
+          submitTimeHandler={submitTimeHandler}
           initialHours={initialHours}
-          setInitialHours={setInitialHours}
           initialMinutes={initialMinutes}
-          setInitialMinutes={setInitialMinutes}
           initialSeconds={initialSeconds}
-          setInitialSeconds={setInitialSeconds}
         />
       )}
     </div>

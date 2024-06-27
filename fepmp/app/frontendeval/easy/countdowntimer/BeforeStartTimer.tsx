@@ -5,33 +5,25 @@ import Input from "@/app/_ui/Input/Input";
 import Button from "@/app/_ui/Button/Button";
 
 type Props = {
-  isStart: boolean;
-  setIsStart: (start: boolean) => void;
-  initialHours: number | "HH";
-  initialMinutes: number | "MM";
-  initialSeconds: number | "SS";
-  setInitialHours: (hours: number) => void;
-  setInitialMinutes: (minutes: number) => void;
-  setInitialSeconds: (seconds: number) => void;
+  submitTimeHandler: () => void;
+  initialHours: { current: number };
+  initialMinutes: { current: number };
+  initialSeconds: { current: number };
 };
 
 const BeforeStartTimer = ({
-  isStart,
-  setIsStart,
+  submitTimeHandler,
   initialHours,
-  setInitialHours,
   initialMinutes,
-  setInitialMinutes,
   initialSeconds,
-  setInitialSeconds,
 }: Props) => {
   const hoursHandler = (e: ChangeEvent<HTMLInputElement>) => {
     let newValue: number = parseInt(e.target.value);
 
     if (isNaN(newValue)) {
-      setInitialHours(0);
+      initialHours.current = 0;
     } else {
-      setInitialHours(newValue);
+      initialHours.current = newValue;
     }
   };
 
@@ -39,13 +31,13 @@ const BeforeStartTimer = ({
     let newValue: number = parseInt(e.target.value);
 
     if (initialMinutes.toString().length >= 3) {
-      setInitialMinutes(0);
+      initialMinutes.current = 0;
     }
 
     if (isNaN(newValue)) {
-      setInitialMinutes(0);
+      initialMinutes.current = 0;
     } else if (initialMinutes.toString().length <= 1) {
-      setInitialMinutes(newValue);
+      initialMinutes.current = newValue;
     }
   };
 
@@ -53,9 +45,9 @@ const BeforeStartTimer = ({
     let newValue: number = parseInt(e.target.value);
 
     if (isNaN(newValue)) {
-      setInitialSeconds(0);
+      initialSeconds.current = 0;
     } else {
-      setInitialSeconds(newValue);
+      initialSeconds.current = newValue;
     }
   };
 
@@ -64,27 +56,27 @@ const BeforeStartTimer = ({
       <h1>Countdown Timer</h1>
       <div>
         <Input
-          value={initialHours}
+          defaultValue="HH"
           type="text"
           onChange={(e: ChangeEvent<HTMLInputElement>) => hoursHandler(e)}
         />
 
         <span>:</span>
         <Input
-          value={initialMinutes}
+          defaultValue="MM"
           type="text"
           onChange={(e: ChangeEvent<HTMLInputElement>) => minutesHandler(e)}
         />
 
         <span>:</span>
         <Input
-          value={initialSeconds}
+          defaultValue="SS"
           type="text"
           onChange={(e: ChangeEvent<HTMLInputElement>) => secondsHandler(e)}
         />
 
         <span>
-          <Button onClick={() => setIsStart(true)}>Start</Button>
+          <Button onClick={submitTimeHandler}>Start</Button>
         </span>
       </div>
     </div>
