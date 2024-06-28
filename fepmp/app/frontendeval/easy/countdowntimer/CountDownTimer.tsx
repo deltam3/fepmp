@@ -21,9 +21,6 @@ const CountDownTimer = () => {
   const [remainingMinutes, setRemainingMinutes] = useState();
   const [remainingSeconds, setRemainingSeconds] = useState();
 
-  // Custom hook to force a re-render
-  const [dummyState, setDummyState] = useState(false); // Dummy state value
-
   useEffect(() => {
     if (isPaused == false) {
       intervalRef.current = setInterval(() => {
@@ -67,10 +64,16 @@ const CountDownTimer = () => {
   }, [remainingHours, remainingMinutes, remainingSeconds, isPaused]);
 
   const submitTimeHandler = () => {
-    setIsStart(true);
-    setRemainingHours(initialHours.current);
-    setRemainingMinutes(initialMinutes.current);
-    setRemainingSeconds(initialSeconds.current);
+    if (
+      typeof initialHours.current === "number" &&
+      typeof initialMinutes.current === "number" &&
+      typeof initialSeconds.current === "number"
+    ) {
+      setIsStart(true);
+      setRemainingHours(initialHours.current);
+      setRemainingMinutes(initialMinutes.current);
+      setRemainingSeconds(initialSeconds.current);
+    }
   };
 
   const pauseHandler = () => {
@@ -88,7 +91,7 @@ const CountDownTimer = () => {
   };
 
   return (
-    <div>
+    <div className="flex justify-center">
       {isStart ? (
         <AfterStartTimer
           remainingHours={remainingHours}

@@ -1,6 +1,5 @@
 import React, { ChangeEvent } from "react";
 
-import { TimeType } from "./CountDownTimer";
 import Input from "@/app/_ui/Input/Input";
 import Button from "@/app/_ui/Button/Button";
 
@@ -18,6 +17,9 @@ const BeforeStartTimer = ({
   initialSeconds,
 }: Props) => {
   const hoursHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    if (isNaN(+e.target.value)) {
+      return;
+    }
     let newValue: number = parseInt(e.target.value);
 
     if (isNaN(newValue)) {
@@ -28,23 +30,27 @@ const BeforeStartTimer = ({
   };
 
   const minutesHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    let newValue: number = parseInt(e.target.value);
-
-    if (initialMinutes.toString().length >= 3) {
-      initialMinutes.current = 0;
+    if (isNaN(+e.target.value)) {
+      return;
     }
+    let newValue: number = parseInt(e.target.value);
 
     if (isNaN(newValue)) {
       initialMinutes.current = 0;
-    } else if (initialMinutes.toString().length <= 1) {
+    } else {
+      // initialMinutes.current = +e.target.value;
       initialMinutes.current = newValue;
     }
   };
 
   const secondsHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    if (isNaN(parseInt(e.target.value))) {
+      return;
+    }
+
     let newValue: number = parseInt(e.target.value);
 
-    if (isNaN(newValue)) {
+    if (isNaN(+e.target.value)) {
       initialSeconds.current = 0;
     } else {
       initialSeconds.current = newValue;
@@ -56,21 +62,24 @@ const BeforeStartTimer = ({
       <h1>Countdown Timer</h1>
       <div>
         <Input
-          defaultValue="HH"
+          placeholder="HH"
+          maxLength={2}
           type="text"
           onChange={(e: ChangeEvent<HTMLInputElement>) => hoursHandler(e)}
         />
 
         <span>:</span>
         <Input
-          defaultValue="MM"
+          placeholder="MM"
+          maxLength={2}
           type="text"
           onChange={(e: ChangeEvent<HTMLInputElement>) => minutesHandler(e)}
         />
 
         <span>:</span>
         <Input
-          defaultValue="SS"
+          maxLength={2}
+          placeholder="SS"
           type="text"
           onChange={(e: ChangeEvent<HTMLInputElement>) => secondsHandler(e)}
         />

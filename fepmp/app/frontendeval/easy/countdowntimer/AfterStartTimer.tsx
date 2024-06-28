@@ -25,18 +25,22 @@ function AfterStartTimer({
   return (
     <div>
       <h2>Countdown Timer</h2>
-      <div>
-        <span>{formatTime(remainingHours)}</span>&nbsp;:&nbsp;
-        <span>{formatTime(remainingMinutes)}</span>&nbsp;:&nbsp;
-        <span>{formatTime(remainingSeconds)}</span>
-      </div>
-      <div>
-        {isPaused ? (
-          <Button onClick={restartHandler}>Restart</Button>
-        ) : (
-          <Button onClick={() => pauseHandler()}>Pause</Button>
-        )}
-        <Button onClick={() => resetHandler()}>Reset</Button>
+      <div className="flex gap-10 align-middle">
+        <div className="flex align-middle justify-center">
+          <span>{formatTime(remainingHours)}</span>
+          <span>:</span>
+          <span>{formatTime(remainingMinutes)}</span>
+          <span>:</span>
+          <span>{formatTime(remainingSeconds)}</span>
+        </div>
+        <div className="flex gap-5">
+          {isPaused ? (
+            <Button onClick={restartHandler}>Restart</Button>
+          ) : (
+            <Button onClick={() => pauseHandler()}>Pause</Button>
+          )}
+          <Button onClick={() => resetHandler()}>Reset</Button>
+        </div>
       </div>
     </div>
   );
