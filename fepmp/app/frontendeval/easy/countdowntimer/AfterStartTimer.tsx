@@ -32,7 +32,7 @@ function AfterStartTimer({
       </div>
       <div>
         {isPaused ? (
-          <Button>Restart</Button>
+          <Button onClick={restartHandler}>Restart</Button>
         ) : (
           <Button onClick={() => pauseHandler()}>Pause</Button>
         )}

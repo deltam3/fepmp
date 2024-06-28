@@ -21,6 +21,9 @@ const CountDownTimer = () => {
   const [remainingMinutes, setRemainingMinutes] = useState();
   const [remainingSeconds, setRemainingSeconds] = useState();
 
+  // Custom hook to force a re-render
+  const [dummyState, setDummyState] = useState(false); // Dummy state value
+
   useEffect(() => {
     intervalRef.current = setInterval(() => {
       if (
@@ -59,7 +62,7 @@ const CountDownTimer = () => {
     }, 1000);
 
     return () => clearInterval(intervalRef.current);
-  }, [remainingHours, remainingMinutes, remainingSeconds]);
+  }, [remainingHours, remainingMinutes, remainingSeconds, isPaused]);
 
   const submitTimeHandler = () => {
     setIsStart(true);
@@ -77,8 +80,9 @@ const CountDownTimer = () => {
     setIsStart(false);
   };
   const restartHandler = () => {
-    setIsPaused(false);
-    setRemainingHours((hours) => hours + 0);
+    setIsPaused((prev) => !prev);
+    // setDummyState((prev) => !prev);
+    // setRemainingHours((hours) => hours);
   };
 
   return (
