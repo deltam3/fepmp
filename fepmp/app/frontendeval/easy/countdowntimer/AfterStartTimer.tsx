@@ -16,6 +16,8 @@ function AfterStartTimer({
   remainingSeconds,
   resetHandler,
   pauseHandler,
+  isPaused,
+  restartHandler,
 }: Props) {
   // const formatTime = (time) => {
   //   return time < 10 ? `0${time}` : time;
@@ -29,7 +31,11 @@ function AfterStartTimer({
         <span>{remainingSeconds}</span>
       </div>
       <div>
-        <Button onClick={() => pauseHandler()}>Pause</Button>
+        {isPaused ? (
+          <Button>Restart</Button>
+        ) : (
+          <Button onClick={() => pauseHandler()}>Pause</Button>
+        )}
         <Button onClick={() => resetHandler()}>Reset</Button>
       </div>
     </div>

@@ -11,16 +11,10 @@ export type TimeType = {
 
 const CountDownTimer = () => {
   const [isStart, setIsStart] = useState<boolean>(false);
-
+  const [isPaused, setIsPaused] = useState<boolean>(false);
   const initialHours = useRef(0);
   const initialMinutes = useRef(0);
   const initialSeconds = useRef(0);
-
-  // const remainingTime = useRef({
-  //   hours: 0,
-  //   minutes: 0,
-  //   seconds: 0,
-  // });
 
   const intervalRef = useRef(null);
   const [remainingHours, setRemainingHours] = useState();
@@ -75,15 +69,17 @@ const CountDownTimer = () => {
   };
 
   const pauseHandler = () => {
+    setIsPaused(true);
     clearInterval(intervalRef.current);
   };
   const resetHandler = () => {
     clearInterval(intervalRef.current);
     setIsStart(false);
   };
-  // const pauseHandler = () => {
-  // console.log("log");
-  // };
+  const restartHandler = () => {
+    setIsPaused(false);
+    setRemainingHours((hours) => hours + 0);
+  };
 
   return (
     <div>
@@ -92,8 +88,11 @@ const CountDownTimer = () => {
           remainingHours={remainingHours}
           remainingMinutes={remainingMinutes}
           remainingSeconds={remainingSeconds}
+          intervalRef={intervalRef}
           resetHandler={resetHandler}
           pauseHandler={pauseHandler}
+          isPaused={isPaused}
+          restartHandler={restartHandler}
         />
       ) : (
         <BeforeStartTimer
