@@ -76,6 +76,7 @@ const CountDownTimer = () => {
           remainingHours={remainingTime.hours}
           remainingMinutes={remainingTime.minutes}
           remainingSeconds={remainingTime.seconds}
+          setIsStart={setIsStart}
         />
       ) : (
         <BeforeStartTimer
