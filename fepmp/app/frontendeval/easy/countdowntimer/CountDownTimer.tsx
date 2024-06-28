@@ -25,41 +25,43 @@ const CountDownTimer = () => {
   const [dummyState, setDummyState] = useState(false); // Dummy state value
 
   useEffect(() => {
-    intervalRef.current = setInterval(() => {
-      if (
-        remainingHours === 0 &&
-        remainingMinutes === 0 &&
-        remainingSeconds === 0
-      ) {
-        clearInterval(interval);
-      } else {
-        if (remainingSeconds > 0) {
-          setRemainingSeconds((seconds) => seconds - 1);
+    if (isPaused == false) {
+      intervalRef.current = setInterval(() => {
+        if (
+          remainingHours === 0 &&
+          remainingMinutes === 0 &&
+          remainingSeconds === 0
+        ) {
+          clearInterval(interval);
         } else {
-          if (remainingMinutes > 0) {
-            // setRemainingTime((prevTime) => ({
-            //   ...prevTime,
-            //   minutes: prevTime.minutes - 1,
-            //   seconds: 59,
-            // }));
-            setRemainingMinutes((minutes) => minutes - 1);
-            setRemainingSeconds((seconds) => (seconds = 59));
-            // remainingTime.current.minutes -= -1;
-            // remainingTime.current.seconds = 59;
+          if (remainingSeconds > 0) {
+            setRemainingSeconds((seconds) => seconds - 1);
           } else {
-            if (remainingHours > 0) {
-              setRemainingHours((hours) => hours - 1);
-              setRemainingMinutes((hours) => (hours = 59));
+            if (remainingMinutes > 0) {
+              // setRemainingTime((prevTime) => ({
+              //   ...prevTime,
+              //   minutes: prevTime.minutes - 1,
+              //   seconds: 59,
+              // }));
+              setRemainingMinutes((minutes) => minutes - 1);
               setRemainingSeconds((seconds) => (seconds = 59));
-
-              // remainingTime.current.hours -= -1;
-              // remainingTime.current.minutes = 59;
+              // remainingTime.current.minutes -= -1;
               // remainingTime.current.seconds = 59;
+            } else {
+              if (remainingHours > 0) {
+                setRemainingHours((hours) => hours - 1);
+                setRemainingMinutes((hours) => (hours = 59));
+                setRemainingSeconds((seconds) => (seconds = 59));
+
+                // remainingTime.current.hours -= -1;
+                // remainingTime.current.minutes = 59;
+                // remainingTime.current.seconds = 59;
+              }
             }
           }
         }
-      }
-    }, 1000);
+      }, 1000);
+    }
 
     return () => clearInterval(intervalRef.current);
   }, [remainingHours, remainingMinutes, remainingSeconds, isPaused]);
