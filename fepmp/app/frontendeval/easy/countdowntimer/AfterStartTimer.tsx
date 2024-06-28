@@ -6,14 +6,15 @@ type Props = {
   remainingHours: number | "HH";
   remainingMinutes: number | "MM";
   remainingSeconds: number | "SS";
-  setIsStart: (start: boolean) => void;
+  resetHandler: () => void;
+  pauseHandler: () => void;
 };
 
 function AfterStartTimer({
   remainingHours,
   remainingMinutes,
   remainingSeconds,
-  setIsStart,
+  resetHandler,
   pauseHandler,
 }: Props) {
   // const formatTime = (time) => {
@@ -29,7 +30,7 @@ function AfterStartTimer({
       </div>
       <div>
         <Button onClick={() => pauseHandler()}>Pause</Button>
-        <Button onClick={() => setIsStart(false)}>Reset</Button>
+        <Button onClick={() => resetHandler()}>Reset</Button>
       </div>
     </div>
   );

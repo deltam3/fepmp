@@ -68,8 +68,6 @@ const CountDownTimer = () => {
   }, [remainingHours, remainingMinutes, remainingSeconds]);
 
   const submitTimeHandler = () => {
-    // if (intervalRef.current !== null) return;
-
     setIsStart(true);
     setRemainingHours(initialHours.current);
     setRemainingMinutes(initialMinutes.current);
@@ -78,6 +76,10 @@ const CountDownTimer = () => {
 
   const pauseHandler = () => {
     clearInterval(intervalRef.current);
+  };
+  const resetHandler = () => {
+    clearInterval(intervalRef.current);
+    setIsStart(false);
   };
   // const pauseHandler = () => {
   // console.log("log");
@@ -90,7 +92,7 @@ const CountDownTimer = () => {
           remainingHours={remainingHours}
           remainingMinutes={remainingMinutes}
           remainingSeconds={remainingSeconds}
-          setIsStart={setIsStart}
+          resetHandler={resetHandler}
           pauseHandler={pauseHandler}
         />
       ) : (
