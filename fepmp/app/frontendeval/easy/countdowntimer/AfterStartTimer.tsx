@@ -1,5 +1,6 @@
 import Button from "@/app/_ui/Button/Button";
 import React, { useState, useEffect } from "react";
+import { TimeType } from "./CountDownTimer";
 
 type Props = {
   remainingHours: number | "HH";
@@ -13,6 +14,7 @@ function AfterStartTimer({
   remainingMinutes,
   remainingSeconds,
   setIsStart,
+  pauseHandler,
 }: Props) {
   // const formatTime = (time) => {
   //   return time < 10 ? `0${time}` : time;
@@ -26,7 +28,7 @@ function AfterStartTimer({
         <span>{remainingSeconds}</span>
       </div>
       <div>
-        <Button>Pause</Button>
+        <Button onClick={() => pauseHandler()}>Pause</Button>
         <Button onClick={() => setIsStart(false)}>Reset</Button>
       </div>
     </div>

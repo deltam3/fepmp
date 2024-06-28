@@ -16,67 +16,82 @@ const CountDownTimer = () => {
   const initialMinutes = useRef(0);
   const initialSeconds = useRef(0);
 
-  const [remainingTime, setRemainingTime] = useState({
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  });
+  // const remainingTime = useRef({
+  //   hours: 0,
+  //   minutes: 0,
+  //   seconds: 0,
+  // });
+
+  const intervalRef = useRef(null);
+  const [remainingHours, setRemainingHours] = useState();
+  const [remainingMinutes, setRemainingMinutes] = useState();
+  const [remainingSeconds, setRemainingSeconds] = useState();
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    intervalRef.current = setInterval(() => {
       if (
-        remainingTime.hours === 0 &&
-        remainingTime.minutes === 0 &&
-        remainingTime.seconds === 0
+        remainingHours === 0 &&
+        remainingMinutes === 0 &&
+        remainingSeconds === 0
       ) {
         clearInterval(interval);
       } else {
-        if (remainingTime.seconds > 0) {
-          setRemainingTime((prevTime) => ({
-            ...prevTime,
-            seconds: prevTime.seconds - 1,
-          }));
+        if (remainingSeconds > 0) {
+          setRemainingSeconds((seconds) => seconds - 1);
         } else {
-          if (remainingTime.minutes > 0) {
-            setRemainingTime((prevTime) => ({
-              ...prevTime,
-              minutes: prevTime.minutes - 1,
-              seconds: 59,
-            }));
+          if (remainingMinutes > 0) {
+            // setRemainingTime((prevTime) => ({
+            //   ...prevTime,
+            //   minutes: prevTime.minutes - 1,
+            //   seconds: 59,
+            // }));
+            setRemainingMinutes((minutes) => minutes - 1);
+            setRemainingSeconds((seconds) => (seconds = 59));
+            // remainingTime.current.minutes -= -1;
+            // remainingTime.current.seconds = 59;
           } else {
-            if (remainingTime.hours > 0) {
-              setRemainingTime((prevTime) => ({
-                ...prevTime,
-                hours: prevTime.hours - 1,
-                minutes: 59,
-                seconds: 59,
-              }));
+            if (remainingHours > 0) {
+              setRemainingHours((hours) => hours - 1);
+              setRemainingMinutes((hours) => (hours = 59));
+              setRemainingSeconds((seconds) => (seconds = 59));
+
+              // remainingTime.current.hours -= -1;
+              // remainingTime.current.minutes = 59;
+              // remainingTime.current.seconds = 59;
             }
           }
         }
       }
     }, 1000);
 
-    return () => clearInterval(interval);
-  }, [remainingTime]);
+    return () => clearInterval(intervalRef.current);
+  }, [remainingHours, remainingMinutes, remainingSeconds]);
 
   const submitTimeHandler = () => {
+    // if (intervalRef.current !== null) return;
+
     setIsStart(true);
-    setRemainingTime({
-      hours: initialHours.current,
-      minutes: initialMinutes.current,
-      seconds: initialSeconds.current,
-    });
+    setRemainingHours(initialHours.current);
+    setRemainingMinutes(initialMinutes.current);
+    setRemainingSeconds(initialSeconds.current);
   };
+
+  const pauseHandler = () => {
+    clearInterval(intervalRef.current);
+  };
+  // const pauseHandler = () => {
+  // console.log("log");
+  // };
 
   return (
     <div>
       {isStart ? (
         <AfterStartTimer
-          remainingHours={remainingTime.hours}
-          remainingMinutes={remainingTime.minutes}
-          remainingSeconds={remainingTime.seconds}
+          remainingHours={remainingHours}
+          remainingMinutes={remainingMinutes}
+          remainingSeconds={remainingSeconds}
           setIsStart={setIsStart}
+          pauseHandler={pauseHandler}
         />
       ) : (
         <BeforeStartTimer
