@@ -8,6 +8,8 @@ import { Inter } from "next/font/google";
 import "@/app/_styles/globals.css";
 import Header from "./_components/Header";
 
+import Modal from "./_ui/Modal/Modal";
+
 const inter = Inter({ subsets: ["latin"] });
 
 // import type { Metadata } from "next";
@@ -28,7 +30,10 @@ export default function RootLayout({
           <GlobalStyles />
           <Header />
           <div>
-            <main>{children}</main>
+            <main>
+              <Modal />
+              {children}
+            </main>
           </div>
         </StyledComponentsRegistry>
       </body>

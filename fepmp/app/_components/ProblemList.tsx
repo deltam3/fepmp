@@ -15,6 +15,10 @@ const ProblemList = () => {
             seconds
           </p>
         </li>
+        <li>
+          <Link href="/frontendeval/easy/modal">Modal</Link>
+          <p>A reusable Modal</p>
+        </li>
       </ul>
     </div>
   );

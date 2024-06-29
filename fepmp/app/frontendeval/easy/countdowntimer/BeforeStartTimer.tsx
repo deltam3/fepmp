@@ -80,7 +80,9 @@ const BeforeStartTimer = ({
         <Input
           maxLength={2}
           placeholder="SS"
-          type="text"
+          // type="text"
+          type="number"
+          // max="59"
           onChange={(e: ChangeEvent<HTMLInputElement>) => secondsHandler(e)}
         />
 
