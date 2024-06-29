@@ -1,30 +1,36 @@
 "use client";
-import { useSearchParams, usePathname } from "next/navigation";
-import Link from "next/link";
+import ReactDOM from "react-dom";
+import { ReactNode, useEffect } from "react";
 
-function Modal() {
-  const searchParams = useSearchParams();
-  const modal = searchParams.get("modal");
-  const pathname = usePathname();
+type ModalProps = {
+  onClose: () => void;
+  children: ReactNode;
+  actionBar: ReactNode;
+};
 
-  return (
-    <>
-      {modal && (
-        <dialog className="fixed left-0 top-0 w-full h-full bg-black bg-opacity-50 z-50 overflow-auto backdrop-blur flex justify-center items-center">
-          <div className="bg-white m-auto p-8">
-            <div className="flex flex-col items-center">
-              <p>모달 내용</p>
-              <br />
-              <Link href={pathname}>
-                <button type="button" className="bg-red-500 text-white p-2">
-                  닫기
-                </button>
-              </Link>
-            </div>
-          </div>
-        </dialog>
-      )}
-    </>
+function Modal({ onClose, children, actionBar }: ModalProps) {
+  useEffect(() => {
+    document.body.classList.add("overflow-hidden");
+
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, []);
+
+  return ReactDOM.createPortal(
+    <div>
+      <div
+        onClick={onClose}
+        className="fixed inset-0 bg-gray-300 opacity-80"
+      ></div>
+      <div className="fixed inset-40 p-10 bg-white">
+        <div className="flex flex-col justify-between h-full">
+          {children}
+          <div className="flex justify-end">{actionBar}</div>
+        </div>
+      </div>
+    </div>,
+    document.querySelector(".modal-container") || document.createElement("div")
   );
 }
 

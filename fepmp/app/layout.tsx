@@ -31,7 +31,8 @@ export default function RootLayout({
           <Header />
           <div>
             <main>
-              <Modal />
+              {/* <Modal /> */}
+              <span className="modal-container"></span>
               {children}
             </main>
           </div>
