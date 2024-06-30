@@ -19,6 +19,12 @@ const ProblemList = () => {
           <Link href="/frontendeval/easy/modal">Modal</Link>
           <p>A reusable Modal</p>
         </li>
+        <li>
+          <Link href="/frontendeval/easy/mortgagecalculator">
+            Mortgage Calculator
+          </Link>
+          <p>월별 주택담보 대출 상환액을 계산하는 계산기 </p>
+        </li>
       </ul>
     </div>
   );
