@@ -3,11 +3,10 @@ import Button from "@/app/_ui/Button/Button";
 import Input from "@/app/_ui/Input/Input";
 import React, { useState } from "react";
 
-function calculateMonthlyPayment(P, r, n) {
+function calculateMonthlyPayment(P: number, r: number, n: number) {
   r = r / 100 / 12;
   n = n * 12;
 
-  // Calculate monthly payment
   const monthlyPayment =
     (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
 
@@ -20,26 +19,26 @@ const Page = () => {
   const [length, setLength] = useState<number>(30);
   const [result, setResult] = useState<number>();
 
-  const onPrincipalHandler = (e: any) => {
-    setPrincipal(e.target.value);
+  const onPrincipalHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPrincipal(+e.target.value);
   };
 
-  const onInterestHandler = (e: any) => {
-    setInterest(e.target.value);
+  const onInterestHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInterest(+e.target.value);
   };
-  const onLengthHandler = (e: any) => {
-    setLength(e.target.value);
+  const onLengthHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLength(+e.target.value);
   };
 
-  const submitHandler = (e: any) => {
+  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const result = calculateMonthlyPayment(principal, interest, length);
     setResult(result);
   };
 
   return (
-    <main className="">
-      <section className="">
+    <main>
+      <section>
         <h1 className="flex justify-center text-3xl font-bold">
           월별 주택담보 대출 상환액을 계산하는 계산기
         </h1>
