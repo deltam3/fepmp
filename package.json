@@ -1,6 +1,10 @@
 {
   "dependencies": {
+    "@iconify/react": "^5.0.1",
+    "clsx": "^2.1.1",
+    "framer-motion": "^11.2.12",
     "react-icons": "^5.2.1",
-    "styled-components": "^6.1.11"
+    "styled-components": "^6.1.11",
+    "tailwind-merge": "^2.3.0"
   }
 }
