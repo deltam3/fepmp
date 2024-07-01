@@ -30,6 +30,7 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
     icon: <Icon icon="lucide:cat" width="24" height="24" />,
     submenu: true,
     subMenuItems: [
+      { title: "All", path: "/frontendeval/" },
       { title: "Easy", path: "/frontendeval/easy/" },
       { title: "Medium", path: "/frontendeval/medium" },
       { title: "Hard", path: "/frontendeval/hard" },
