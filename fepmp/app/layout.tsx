@@ -30,13 +30,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`bg-white ${inter.className}`}>
+        <span className="modal-container"></span>
+
         <StyledComponentsRegistry>
           <GlobalStyles />
 
           <div>
-            <span className="modal-container"></span>
             <div>
               <SideNav />
+
               <main className="flex-1">
                 <MarginWidthWrapper>
                   <Header />

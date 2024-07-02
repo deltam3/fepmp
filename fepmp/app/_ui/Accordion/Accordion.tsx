@@ -80,6 +80,29 @@
 "use client";
 
 import React, { createContext, useContext, useState, ReactNode } from "react";
+import styled, { keyframes } from "styled-components";
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    height: 0;
+  }
+  to {
+    opacity: 1;
+    height: auto
+  }
+`;
+
+const fadeOut = keyframes`
+  from {
+    opacity: 1;
+    height: auto
+  }
+  to {
+    opacity: 0;
+    height: 0;
+  }
+`;
 
 interface AccordionContextType {
   activeIndex: number | null;
@@ -96,6 +119,16 @@ interface AccordionProps {
   AccordionItem?: React.FunctionComponent<AccordionItemProps>;
 }
 
+// Accordion Parent Setup
+
+const StyledAccordionWrapper = styled.div`
+  border: 1px solid var(--color-grey-900);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 10px;
+  max-width: 50rem;
+`;
+
 const Accordion: React.FC<AccordionProps> & {
   AccordionItem: React.FC<AccordionItemProps>;
 } = ({ children }) => {
@@ -107,10 +140,12 @@ const Accordion: React.FC<AccordionProps> & {
 
   return (
     <AccordionContext.Provider value={{ activeIndex, handleItemClick }}>
-      <span>{children}</span>
+      <StyledAccordionWrapper>{children}</StyledAccordionWrapper>
     </AccordionContext.Provider>
   );
 };
+
+// Accordion Item Setup
 
 import { AccordionItemData } from "@/app/frontendeval/easy/faq/page";
 
@@ -119,12 +154,36 @@ type AccordionItemProps = {
   index: number;
 };
 
+interface AccordionContextType {
+  activeIndex: number | null;
+  handleItemClick: (index: number) => void;
+}
+
+const StyledAccordionHeader = styled.div`
+  background-color: var(--color-grey-0);
+  padding: 10px;
+  cursor: pointer;
+`;
+
+const StyledAccordionContent = styled.div`
+  padding: 10px;
+  animation: ${({ isOpen }) => (isOpen ? fadeIn : fadeOut)} 0.3s ease-in-out
+    forwards;
+  opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};
+  height: ${({ isOpen }) => (isOpen ? "auto" : 0)};
+  overflow: hidden;
+`;
+
 const AccordionItem: React.FC<AccordionItemProps> = ({ item, index }) => {
-  const { activeIndex, handleItemClick } = useContext(AccordionContext);
+  const { activeIndex, handleItemClick } = useContext(AccordionContext)!;
   return (
     <div onClick={() => handleItemClick(index)}>
-      <p>{item.question}</p>
-      {activeIndex === index && <p>{item.answer}</p>}
+      <StyledAccordionHeader>{item.question}</StyledAccordionHeader>
+      {activeIndex === index && (
+        <StyledAccordionContent isOpen={activeIndex === index}>
+          {item.answer}
+        </StyledAccordionContent>
+      )}
     </div>
   );
 };

@@ -1,12 +1,30 @@
 "use client";
 import ReactDOM from "react-dom";
 import { ReactNode, useEffect } from "react";
+import styled from "styled-components";
 
 type ModalProps = {
   onClose: () => void;
   children: ReactNode;
   actionBar: ReactNode;
 };
+
+const StyledOutsideArea = styled.div`
+  position: fixed;
+  inset: 0px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(209 213 219 / var(--tw-bg-opacity));
+  opacity: 0.8;
+`;
+
+const StyledModalContainer = styled.div`
+  position: fixed;
+  inset: 10rem;
+  padding: 2.5rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  border-radius: 10px;
+`;
 
 function Modal({ onClose, children, actionBar }: ModalProps) {
   useEffect(() => {
@@ -18,17 +36,14 @@ function Modal({ onClose, children, actionBar }: ModalProps) {
   }, []);
 
   return ReactDOM.createPortal(
-    <div>
-      <div
-        onClick={onClose}
-        className="fixed inset-0 bg-gray-300 opacity-80"
-      ></div>
-      <div className="fixed inset-40 p-10 bg-white">
+    <div className="fixed z-[9999]">
+      <StyledOutsideArea onClick={onClose}></StyledOutsideArea>
+      <StyledModalContainer>
         <div className="flex flex-col justify-between h-full">
           {children}
           <div className="flex justify-end">{actionBar}</div>
         </div>
-      </div>
+      </StyledModalContainer>
     </div>,
     document.querySelector(".modal-container") || document.createElement("div")
   );
