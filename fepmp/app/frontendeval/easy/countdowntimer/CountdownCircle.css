@@ -1,0 +1,19 @@
+.countdown-circle {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle {
+  transform: rotate(-90deg);
+  width: 100%;
+  height: 100%;
+}
+
+.timer {
+  position: absolute;
+  font-size: 2em;
+}

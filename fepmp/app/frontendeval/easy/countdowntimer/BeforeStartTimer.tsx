@@ -30,12 +30,14 @@ const BeforeStartTimer = ({
   };
 
   const minutesHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    if (isNaN(+e.target.value)) {
+    if (isNaN(parseInt(e.target.value))) {
       return;
     }
     let newValue: number = parseInt(e.target.value);
 
-    if (isNaN(newValue)) {
+    // if (isNaN(newValue)) {
+
+    if (isNaN(+e.target.value)) {
       initialMinutes.current = 0;
     } else {
       // initialMinutes.current = +e.target.value;
@@ -64,7 +66,7 @@ const BeforeStartTimer = ({
         <Input
           placeholder="HH"
           maxLength={2}
-          type="text"
+          type="number"
           onChange={(e: ChangeEvent<HTMLInputElement>) => hoursHandler(e)}
         />
 
@@ -72,7 +74,7 @@ const BeforeStartTimer = ({
         <Input
           placeholder="MM"
           maxLength={2}
-          type="text"
+          type="number"
           onChange={(e: ChangeEvent<HTMLInputElement>) => minutesHandler(e)}
         />
 

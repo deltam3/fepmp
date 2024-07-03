@@ -96,11 +96,11 @@
 // export default Page;
 
 "use client";
-// import React, { useState, useEffect } from "react";
-import CountDownTimer from "./CountDownTimer";
-
+// import CountDownTimer from "./CountDownTimer";
+import NewCountDownTimer from "./NewCountDownTimer";
 function Page() {
-  return <CountDownTimer></CountDownTimer>;
+  // return <CountDownTimer></CountDownTimer>;
+  return <NewCountDownTimer></NewCountDownTimer>;
 }
 
 export default Page;
