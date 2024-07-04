@@ -1,9 +1,9 @@
-// import React from "react";
+import React from "react";
 
-// type Props = {};
+type Props = {};
 
-// const NewCountDownTimer = (props: Props) => {
-//   return <div>NewCountDownTimer</div>;
-// };
+const NewCountDownTimer = (props: Props) => {
+  return <div>NewCountDownTimer</div>;
+};
 
-// export default NewCountDownTimer;
+export default NewCountDownTimer;
