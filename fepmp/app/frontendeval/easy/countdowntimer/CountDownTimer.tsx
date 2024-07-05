@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 
 type Props = {};
 
-const NewCountDownTimer = (props: Props) => {
-  return <div>NewCountDownTimer</div>;
+const CountDownTimer = (props: Props) => {
+  return <div>CountDownTimer</div>;
 };
 
-export default NewCountDownTimer;
+export default CountDownTimer;

@@ -97,9 +97,9 @@
 
 "use client";
 
-import NewCountDownTimer from "./CountDownTimer";
+import CountDownTimer from "./CountDownTimer";
 function Page() {
-  return <NewCountDownTimer></NewCountDownTimer>;
+  return <CountDownTimer></CountDownTimer>;
 }
 
 export default Page;
