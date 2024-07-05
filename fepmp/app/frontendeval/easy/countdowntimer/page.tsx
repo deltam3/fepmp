@@ -96,10 +96,9 @@
 // export default Page;
 
 "use client";
-// import CountDownTimer from "./CountDownTimer";
-import NewCountDownTimer from "./NewCountDownTimer";
+
+import NewCountDownTimer from "./CountDownTimer";
 function Page() {
-  // return <CountDownTimer></CountDownTimer>;
   return <NewCountDownTimer></NewCountDownTimer>;
 }
 

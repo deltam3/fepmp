@@ -1,6 +1,6 @@
 import Button from "@/app/_ui/Button/Button";
 import React, { useState, useEffect } from "react";
-import { TimeType } from "./CountDownTimer";
+import { TimeType } from "./OldCountDownTimer";
 
 type Props = {
   remainingHours: number | "HH";
