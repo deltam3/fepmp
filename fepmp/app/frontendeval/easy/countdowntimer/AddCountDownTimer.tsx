@@ -15,9 +15,9 @@ const StyledAddContainer = styled.button`
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.06);
 `;
 
-const AddCountDownTimer = ({}: Props) => {
+const AddCountDownTimer = ({ addTimer }: Props) => {
   return (
-    <StyledAddContainer>
+    <StyledAddContainer onClick={addTimer}>
       <p>+</p>
     </StyledAddContainer>
   );

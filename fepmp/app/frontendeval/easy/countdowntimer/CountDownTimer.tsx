@@ -4,15 +4,24 @@ import CountDownTimerList from "./CountDownTimerList";
 
 type Props = {};
 
+let id = 1;
+
 const CountDownTimer = (props: Props) => {
-  const [timers, setTimers] = useState([
-    { id: 1, name: "Timer 1", hours: 0, minutes: 1, seconds: 0 },
-  ]);
+  const [timers, setTimers] = useState([{ id: 1, name: "Timer 1" }]);
+  const timersLength = timers.length;
+
+  const addTimerHandler = (e) => {
+    id += 1;
+    setTimers([...timers, { id: id + 1, name: `Timer ${timersLength}` }]);
+  };
 
   return (
     <div>
-      <CountDownTimerList timers={timers}></CountDownTimerList>
-      <AddCountDownTimer></AddCountDownTimer>
+      <CountDownTimerList
+        timers={timers}
+        timersLength={timersLength}
+      ></CountDownTimerList>
+      <AddCountDownTimer addTimer={addTimerHandler}></AddCountDownTimer>
     </div>
   );
 };
