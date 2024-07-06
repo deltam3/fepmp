@@ -2,7 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 
 type Props = {};
 
-const CountDownTimerItem = ({ item, timersLength }: Props) => {
+const formatTime = (time) => {
+  return time < 10 ? `0${time}` : time;
+};
+
+const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
   const [name, setName] = useState(`Timer ${timersLength}`);
   const [isStart, setIsStart] = useState<boolean>(false);
   const [isPaused, setIsPaused] = useState<boolean>(false);
@@ -67,16 +71,10 @@ const CountDownTimerItem = ({ item, timersLength }: Props) => {
   }, [remainingHours, remainingMinutes, remainingSeconds, isPaused]);
 
   const submitTimeHandler = () => {
-    if (
-      typeof initialHours === "number" &&
-      typeof initialMinutes === "number" &&
-      typeof initialSeconds === "number"
-    ) {
-      setIsStart(true);
-      setRemainingHours(initialHours.current);
-      setRemainingMinutes(initialMinutes.current);
-      setRemainingSeconds(initialSeconds.current);
-    }
+    setIsStart(true);
+    setRemainingHours(initialHours);
+    setRemainingMinutes(initialMinutes);
+    setRemainingSeconds(initialSeconds);
   };
 
   const pauseHandler = () => {
@@ -97,7 +95,11 @@ const CountDownTimerItem = ({ item, timersLength }: Props) => {
         <button onClick={submitTimeHandler}>Start</button>
       </div>
       <div className="flex flex-col justify-center">
-        <div className="flex justify-end">{isStart == false && <p>x</p>}</div>
+        <div className="flex justify-end">
+          {isStart == false && (
+            <button onClick={() => deleteTimer(item.id)}>x</button>
+          )}
+        </div>
         <div className="name">
           <input
             type="text"
@@ -107,41 +109,46 @@ const CountDownTimerItem = ({ item, timersLength }: Props) => {
           />
         </div>
         <div className="time">
-          <div className="time_display">
-            <span className="hours_minutes"></span>
-            <span className="seconds"> </span>
-          </div>
-          <div className="time_input">
-            <input
-              type="tel"
-              pattern="\d*"
-              maxLength={2}
-              placeholder="HH"
-              value={initialHours}
-              onChange={hoursInputHandler}
-              className="font-bold h-[33.5px] border-none mb-[13.781px] px-[5.512px] py-[2.756px] rounded-[4px] w-[38.5px] text-center text-[rgb(51, 51, 51)] text-[13.7px] bg-[rgb(242, 242, 242)]"
-            />
-            <span className="separator">:</span>
-            <input
-              type="tel"
-              pattern="\d*"
-              maxLength={2}
-              placeholder="MM"
-              value={initialMinutes}
-              onChange={minutesInputHandler}
-              className="font-bold h-[33.5px] border-none mb-[13.781px] px-[5.512px] py-[2.756px] rounded-[4px] w-[38.5px] text-center text-[rgb(51, 51, 51)] text-[13.7px] bg-[rgb(242, 242, 242)]"
-            />
-            <span className="separator">:</span>
-            <input
-              type="tel"
-              pattern="\d*"
-              maxLength={2}
-              placeholder="SS"
-              value={initialSeconds}
-              onChange={secondsInputHandler}
-              className="font-bold h-[33.5px] border-none mb-[13.781px] px-[5.512px] py-[2.756px] rounded-[4px] w-[38.5px] text-center text-[rgb(51, 51, 51)] text-[13.7px] bg-[rgb(242, 242, 242)]"
-            />
-          </div>
+          {isStart ? (
+            <div className="time_display">
+              <span className="hours_minutes">
+                {formatTime(remainingHours)}:{formatTime(remainingMinutes)}
+              </span>
+              <span className="seconds">{formatTime(remainingSeconds)}</span>
+            </div>
+          ) : (
+            <div className="time_input">
+              <input
+                type="tel"
+                pattern="\d*"
+                maxLength={2}
+                placeholder="HH"
+                value={initialHours}
+                onChange={hoursInputHandler}
+                className="font-bold h-[33.5px] border-none mb-[13.781px] px-[5.512px] py-[2.756px] rounded-[4px] w-[38.5px] text-center text-[rgb(51, 51, 51)] text-[13.7px] bg-[rgb(242, 242, 242)]"
+              />
+              <span className="separator">:</span>
+              <input
+                type="tel"
+                pattern="\d*"
+                maxLength={2}
+                placeholder="MM"
+                value={initialMinutes}
+                onChange={minutesInputHandler}
+                className="font-bold h-[33.5px] border-none mb-[13.781px] px-[5.512px] py-[2.756px] rounded-[4px] w-[38.5px] text-center text-[rgb(51, 51, 51)] text-[13.7px] bg-[rgb(242, 242, 242)]"
+              />
+              <span className="separator">:</span>
+              <input
+                type="tel"
+                pattern="\d*"
+                maxLength={2}
+                placeholder="SS"
+                value={initialSeconds}
+                onChange={secondsInputHandler}
+                className="font-bold h-[33.5px] border-none mb-[13.781px] px-[5.512px] py-[2.756px] rounded-[4px] w-[38.5px] text-center text-[rgb(51, 51, 51)] text-[13.7px] bg-[rgb(242, 242, 242)]"
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>

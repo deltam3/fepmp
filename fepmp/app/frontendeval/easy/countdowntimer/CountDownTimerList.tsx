@@ -2,7 +2,7 @@ import React from "react";
 import CountDownTimerItem from "./CountDownTimerItem";
 type Props = {};
 
-const CountDownTimerList = ({ timers, timersLength }: Props) => {
+const CountDownTimerList = ({ timers, timersLength, deleteTimer }: Props) => {
   return (
     <div>
       {timers.map((item) => (
@@ -10,6 +10,7 @@ const CountDownTimerList = ({ timers, timersLength }: Props) => {
           key={item.id}
           item={item}
           timersLength={timersLength}
+          deleteTimer={deleteTimer}
         />
       ))}
     </div>

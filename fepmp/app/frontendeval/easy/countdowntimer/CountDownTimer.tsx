@@ -15,11 +15,17 @@ const CountDownTimer = (props: Props) => {
     setTimers([...timers, { id: id + 1, name: `Timer ${timersLength}` }]);
   };
 
+  const deleteTimerHandler = (indexToDelete) => {
+    const updatedItems = timers.filter((item) => item.id !== indexToDelete);
+    setTimers(updatedItems);
+  };
+
   return (
     <div>
       <CountDownTimerList
         timers={timers}
         timersLength={timersLength}
+        deleteTimer={deleteTimerHandler}
       ></CountDownTimerList>
       <AddCountDownTimer addTimer={addTimerHandler}></AddCountDownTimer>
     </div>
