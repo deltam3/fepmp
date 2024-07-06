@@ -10,9 +10,9 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
   const [name, setName] = useState(`Timer ${timersLength}`);
   const [isStart, setIsStart] = useState<boolean>(false);
   const [isPaused, setIsPaused] = useState<boolean>(false);
-  const [initialHours, setInitialHours] = useState("HH");
-  const [initialMinutes, setInitialMinutes] = useState("01");
-  const [initialSeconds, setInitialSeconds] = useState("00");
+  const [initialHours, setInitialHours] = useState(0);
+  const [initialMinutes, setInitialMinutes] = useState(1);
+  const [initialSeconds, setInitialSeconds] = useState(0);
 
   const intervalRef = useRef(null);
   const [remainingHours, setRemainingHours] = useState(0);
@@ -58,7 +58,7 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
             } else {
               if (remainingHours > 0) {
                 setRemainingHours((hours) => hours - 1);
-                setRemainingMinutes((hours) => (hours = 59));
+                setRemainingMinutes((minutes) => (minutes = 59));
                 setRemainingSeconds((seconds) => (seconds = 59));
               }
             }
@@ -123,7 +123,7 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
                 pattern="\d*"
                 maxLength={2}
                 placeholder="HH"
-                value={initialHours}
+                value={formatTime(initialHours)}
                 onChange={hoursInputHandler}
                 className="font-bold h-[33.5px] border-none mb-[13.781px] px-[5.512px] py-[2.756px] rounded-[4px] w-[38.5px] text-center text-[rgb(51, 51, 51)] text-[13.7px] bg-[rgb(242, 242, 242)]"
               />
@@ -133,7 +133,7 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
                 pattern="\d*"
                 maxLength={2}
                 placeholder="MM"
-                value={initialMinutes}
+                value={formatTime(initialMinutes)}
                 onChange={minutesInputHandler}
                 className="font-bold h-[33.5px] border-none mb-[13.781px] px-[5.512px] py-[2.756px] rounded-[4px] w-[38.5px] text-center text-[rgb(51, 51, 51)] text-[13.7px] bg-[rgb(242, 242, 242)]"
               />
@@ -143,7 +143,7 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
                 pattern="\d*"
                 maxLength={2}
                 placeholder="SS"
-                value={initialSeconds}
+                value={formatTime(initialSeconds)}
                 onChange={secondsInputHandler}
                 className="font-bold h-[33.5px] border-none mb-[13.781px] px-[5.512px] py-[2.756px] rounded-[4px] w-[38.5px] text-center text-[rgb(51, 51, 51)] text-[13.7px] bg-[rgb(242, 242, 242)]"
               />
