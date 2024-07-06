@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 type Props = {};
 
@@ -10,9 +10,10 @@ const CountDownTimerItem = ({ item, timersLength }: Props) => {
   const [initialMinutes, setInitialMinutes] = useState("01");
   const [initialSeconds, setInitialSeconds] = useState("00");
 
-  const [hoursLeft, setHoursLeft] = useState(0);
-  const [minutesLeft, setMinutesLeft] = useState(0);
-  const [secondsLeft, setSecondsLeft] = useState(0);
+  const intervalRef = useRef(null);
+  const [remainingHours, setRemainingHours] = useState(0);
+  const [remainingMinutes, setRemainingMinutes] = useState(0);
+  const [remainingSeconds, setRemainingSeconds] = useState(0);
 
   const nameInputHandler = (e) => {
     e.stopPropagation();
@@ -34,17 +35,82 @@ const CountDownTimerItem = ({ item, timersLength }: Props) => {
     setInitialSeconds(numericValue);
   };
 
-  return (
-    <div className="flex">
-      <div className="w-[45%] h-full">CIRCLE</div>
-      <div className="flex flex-col">
-        <div className="name">
-          {/* <p>{item.name}</p> */}
+  useEffect(() => {
+    if (isPaused == false) {
+      intervalRef.current = setInterval(() => {
+        if (
+          remainingHours === 0 &&
+          remainingMinutes === 0 &&
+          remainingSeconds === 0
+        ) {
+          clearInterval(intervalRef.current);
+        } else {
+          if (remainingSeconds > 0) {
+            setRemainingSeconds((seconds) => seconds - 1);
+          } else {
+            if (remainingMinutes > 0) {
+              setRemainingMinutes((minutes) => minutes - 1);
+              setRemainingSeconds((seconds) => (seconds = 59));
+            } else {
+              if (remainingHours > 0) {
+                setRemainingHours((hours) => hours - 1);
+                setRemainingMinutes((hours) => (hours = 59));
+                setRemainingSeconds((seconds) => (seconds = 59));
+              }
+            }
+          }
+        }
+      }, 1000);
+    }
 
-          <input type="text" value={name} onChange={nameInputHandler} />
+    return () => clearInterval(intervalRef.current);
+  }, [remainingHours, remainingMinutes, remainingSeconds, isPaused]);
+
+  const submitTimeHandler = () => {
+    if (
+      typeof initialHours === "number" &&
+      typeof initialMinutes === "number" &&
+      typeof initialSeconds === "number"
+    ) {
+      setIsStart(true);
+      setRemainingHours(initialHours.current);
+      setRemainingMinutes(initialMinutes.current);
+      setRemainingSeconds(initialSeconds.current);
+    }
+  };
+
+  const pauseHandler = () => {
+    setIsPaused(true);
+    clearInterval(intervalRef.current);
+  };
+  const resetHandler = () => {
+    clearInterval(intervalRef.current);
+    setIsStart(false);
+  };
+  const restartHandler = () => {
+    setIsPaused((prev) => !prev);
+  };
+
+  return (
+    <div className="flex justify-center align-middle bg-[var(--color-grey-0)] w-[303px] h-[138px] mx-[5px] mb-[10px] ">
+      <div className="w-[45%] h-full">
+        <button onClick={submitTimeHandler}>Start</button>
+      </div>
+      <div className="flex flex-col justify-center">
+        <div className="flex justify-end">{isStart == false && <p>x</p>}</div>
+        <div className="name">
+          <input
+            type="text"
+            value={name}
+            onChange={nameInputHandler}
+            className="mb-[13.781px] px-[5.512px] py-[2.756px] w-[134.703px] h-[33px] bg-[#F2F2F2]"
+          />
         </div>
         <div className="time">
-          {/* <div className="time_display"></div> */}
+          <div className="time_display">
+            <span className="hours_minutes"></span>
+            <span className="seconds"> </span>
+          </div>
           <div className="time_input">
             <input
               type="tel"
@@ -53,6 +119,7 @@ const CountDownTimerItem = ({ item, timersLength }: Props) => {
               placeholder="HH"
               value={initialHours}
               onChange={hoursInputHandler}
+              className="font-bold h-[33.5px] border-none mb-[13.781px] px-[5.512px] py-[2.756px] rounded-[4px] w-[38.5px] text-center text-[rgb(51, 51, 51)] text-[13.7px] bg-[rgb(242, 242, 242)]"
             />
             <span className="separator">:</span>
             <input
@@ -62,6 +129,7 @@ const CountDownTimerItem = ({ item, timersLength }: Props) => {
               placeholder="MM"
               value={initialMinutes}
               onChange={minutesInputHandler}
+              className="font-bold h-[33.5px] border-none mb-[13.781px] px-[5.512px] py-[2.756px] rounded-[4px] w-[38.5px] text-center text-[rgb(51, 51, 51)] text-[13.7px] bg-[rgb(242, 242, 242)]"
             />
             <span className="separator">:</span>
             <input
@@ -71,6 +139,7 @@ const CountDownTimerItem = ({ item, timersLength }: Props) => {
               placeholder="SS"
               value={initialSeconds}
               onChange={secondsInputHandler}
+              className="font-bold h-[33.5px] border-none mb-[13.781px] px-[5.512px] py-[2.756px] rounded-[4px] w-[38.5px] text-center text-[rgb(51, 51, 51)] text-[13.7px] bg-[rgb(242, 242, 242)]"
             />
           </div>
         </div>

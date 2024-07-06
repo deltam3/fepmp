@@ -13,6 +13,7 @@ const StyledAddContainer = styled.button`
   align-items: center;
   border-radius: 8px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.06);
+  background-color: var(--color-grey-400);
 `;
 
 const AddCountDownTimer = ({ addTimer }: Props) => {

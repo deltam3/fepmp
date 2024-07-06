@@ -37,6 +37,7 @@ const GlobalStyles = createGlobalStyle`
   --shadow-md: 0px 0.6rem 2.4rem rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 2.4rem 3.2rem rgba(0, 0, 0, 0.12);
   
+  /* --timer- */
   --timer-add-bg: #e5e5e5;
 
     --image-grayscale: 0;
