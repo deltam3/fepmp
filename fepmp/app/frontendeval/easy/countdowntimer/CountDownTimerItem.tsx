@@ -84,7 +84,8 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
   };
   const resetHandler = () => {
     clearInterval(intervalRef.current);
-    setIsStart(false);
+    setIsStart((state) => false);
+    setIsPaused((state) => false);
   };
   const restartHandler = () => {
     setIsPaused((prev) => !prev);
