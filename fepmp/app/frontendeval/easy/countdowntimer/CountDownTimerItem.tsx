@@ -92,7 +92,8 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
   return (
     <div className="flex justify-center align-middle bg-[var(--color-grey-0)] w-[303px] h-[138px] mx-[5px] mb-[10px] ">
       <div className="w-[45%] h-full">
-        <button onClick={submitTimeHandler}>Start</button>
+        {isStart == false && <button onClick={submitTimeHandler}>Start</button>}
+        {isStart == true && <button onClick={pauseHandler}>Pause</button>}
       </div>
       <div className="flex flex-col justify-center">
         <div className="flex justify-end">
