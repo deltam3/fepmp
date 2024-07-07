@@ -78,7 +78,8 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
   };
 
   const pauseHandler = () => {
-    setIsPaused(true);
+    // setIsPaused(true);
+    setIsPaused((paused) => !paused);
     clearInterval(intervalRef.current);
   };
   const resetHandler = () => {
@@ -93,13 +94,19 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
     <div className="flex justify-center align-middle bg-[var(--color-grey-0)] w-[303px] h-[138px] mx-[5px] mb-[10px] ">
       <div className="w-[45%] h-full">
         {isStart == false && <button onClick={submitTimeHandler}>Start</button>}
-        {isStart == true && <button onClick={pauseHandler}>Pause</button>}
+        {isStart == true && isPaused == false && (
+          <button onClick={pauseHandler}>Pause</button>
+        )}
+        {isStart == true && isPaused == true && (
+          <button onClick={restartHandler}>Restart</button>
+        )}
       </div>
       <div className="flex flex-col justify-center">
         <div className="flex justify-end">
           {isStart == false && (
             <button onClick={() => deleteTimer(item.id)}>x</button>
           )}
+          {isPaused == true && <button onClick={resetHandler}>RESET</button>}
         </div>
         <div className="name">
           <input
