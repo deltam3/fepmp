@@ -91,6 +91,10 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
     setIsPaused((prev) => !prev);
   };
 
+  const addMinutesHandler = () => {
+    setRemainingMinutes((state) => state + 1);
+  };
+
   return (
     <div className="flex justify-center align-middle bg-[var(--color-grey-0)] w-[303px] h-[138px] mx-[5px] mb-[10px] ">
       <div className="w-[45%] h-full">
@@ -158,6 +162,11 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
               />
             </div>
           )}
+        </div>
+        <div>
+          <div className="flex justify-end">
+            {isStart && <button onClick={addMinutesHandler}>+1</button>}
+          </div>
         </div>
       </div>
     </div>
