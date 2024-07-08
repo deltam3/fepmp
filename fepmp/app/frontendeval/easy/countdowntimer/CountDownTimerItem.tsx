@@ -115,7 +115,7 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
     remainingHours * 3600 + remainingMinutes * 60 + remainingSeconds;
 
   return (
-    <div className="flex justify-center align-middle bg-[var(--color-grey-0)] w-[303px] h-[138px] mx-[5px] mb-[10px] ">
+    <div className="flex justify-center align-middle bg-[var(--color-grey-0)] w-[30.3rem] h-[13.8rem] mx-[5px] mb-[10px] ">
       <div className="w-[45%] h-full">
         {isStart == false && <button onClick={submitTimeHandler}>Start</button>}
         {isStart == true && isPaused == false && (
@@ -127,7 +127,7 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
         {/* <Pie percentage={totalRemainingSeconds} isPaused={isPaused}></Pie> */}
       </div>
       <div className="flex flex-col justify-center">
-        <div className="flex justify-end">
+        <div className="flex justify-end ">
           {isStart == false && (
             <button onClick={() => deleteTimer(item.id)}>x</button>
           )}
@@ -136,67 +136,71 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
             <p className="invisible">BLANK</p>
           )}
         </div>
-        <div className="name">
-          <input
-            type="text"
-            value={name}
-            onChange={nameInputHandler}
-            className="mb-[13.781px] px-[5.512px] py-[2.756px] w-[134.703px] h-[33px] bg-[#F2F2F2]"
-          />
-        </div>
-        <div className="time">
-          {isStart ? (
-            <div className="time_display">
-              <span className="hours_minutes">
-                <span className="text-[3.7584rem]">
-                  {formatTime(remainingHours)}
+        <div>
+          <div className="name">
+            <input
+              type="text"
+              value={name}
+              onChange={nameInputHandler}
+              className="mb-[1.3781rem] px-[.5512rem] py-[.2756rem] w-[13.4703rem] h-[3.3rem] bg-[#F2F2F2]"
+            />
+          </div>
+          <div className="time">
+            {isStart ? (
+              <div className="time_display mt-[-2rem] ">
+                <span className="hours_minutes">
+                  <span className="text-[3.7584rem]">
+                    {formatTime(remainingHours)}
+                  </span>
+                  <span>:</span>
+                  <span className="text-[3.7584rem]">
+                    {formatTime(remainingMinutes)}
+                  </span>
                 </span>
-                <span>:</span>
-                <span className="text-[3.7584rem]">
-                  {formatTime(remainingMinutes)}
+                <span className="seconds text-[1.8792rem] relative bottom-[1.2rem] text-[var(--color-grey-400)]">
+                  {formatTime(remainingSeconds)}
                 </span>
-              </span>
-              <span className="seconds text-[1.8792rem] relative bottom-[1.2rem]">
-                {formatTime(remainingSeconds)}
-              </span>
-            </div>
-          ) : (
-            <div className="time_input">
-              <input
-                type="tel"
-                pattern="\d*"
-                maxLength={2}
-                placeholder="HH"
-                value={formatTime(initialHours)}
-                onChange={hoursInputHandler}
-                className="font-bold h-[33.5px] border-none mb-[13.781px] px-[5.512px] py-[2.756px] rounded-[4px] w-[38.5px] text-center text-[rgb(51, 51, 51)] text-[13.7px] bg-[rgb(242, 242, 242)]"
-              />
-              <span className="separator">:</span>
-              <input
-                type="tel"
-                pattern="\d*"
-                maxLength={2}
-                placeholder="MM"
-                value={formatTime(initialMinutes)}
-                onChange={minutesInputHandler}
-                className="font-bold h-[33.5px] border-none mb-[13.781px] px-[5.512px] py-[2.756px] rounded-[4px] w-[38.5px] text-center text-[rgb(51, 51, 51)] text-[13.7px] bg-[rgb(242, 242, 242)]"
-              />
-              <span className="separator">:</span>
-              <input
-                type="tel"
-                pattern="\d*"
-                maxLength={2}
-                placeholder="SS"
-                value={formatTime(initialSeconds)}
-                onChange={secondsInputHandler}
-                className="font-bold h-[33.5px] border-none mb-[13.781px] px-[5.512px] py-[2.756px] rounded-[4px] w-[38.5px] text-center text-[rgb(51, 51, 51)] text-[13.7px] bg-[rgb(242, 242, 242)]"
-              />
-            </div>
-          )}
+              </div>
+            ) : (
+              <div className="time_input">
+                <input
+                  type="tel"
+                  pattern="\d*"
+                  maxLength={2}
+                  placeholder="HH"
+                  value={formatTime(initialHours)}
+                  onChange={hoursInputHandler}
+                  className="font-bold border-none mb-[13.781px] px-[5.512px] py-[2.756px] rounded-[4px] w-[38.5px] text-center text-[rgb(51, 51, 51)] text-[13.7px] bg-[rgb(242, 242, 242)]"
+                />
+                <span className="separator">:</span>
+                <input
+                  type="tel"
+                  pattern="\d*"
+                  maxLength={2}
+                  placeholder="MM"
+                  value={formatTime(initialMinutes)}
+                  onChange={minutesInputHandler}
+                  className="font-bold border-none mb-[13.781px] px-[5.512px] py-[2.756px] rounded-[4px] w-[38.5px] text-center text-[rgb(51, 51, 51)] text-[13.7px] bg-[rgb(242, 242, 242)]"
+                />
+                <span className="separator">:</span>
+                <input
+                  type="tel"
+                  pattern="\d*"
+                  maxLength={2}
+                  placeholder="SS"
+                  value={formatTime(initialSeconds)}
+                  onChange={secondsInputHandler}
+                  className="font-bold border-none mb-[13.781px] px-[5.512px] py-[2.756px] rounded-[4px] w-[38.5px] text-center text-[rgb(51, 51, 51)] text-[13.7px] bg-[rgb(242, 242, 242)]"
+                />
+              </div>
+            )}
+          </div>
         </div>
+
         <div>
           <div className="flex justify-end">
             {isStart && <button onClick={addMinutesHandler}>+1</button>}
+            {isStart == false && <p className="invisible">BLANK</p>}
           </div>
         </div>
       </div>
