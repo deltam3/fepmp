@@ -1,4 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
+import TimerCircle from "./TimerCircle";
+import CircularProgress from "./TimerCircle";
+import Pie from "@/app/_ui/ProgressBar/Pie";
 
 type Props = {};
 
@@ -18,6 +21,11 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
   const [remainingHours, setRemainingHours] = useState(0);
   const [remainingMinutes, setRemainingMinutes] = useState(0);
   const [remainingSeconds, setRemainingSeconds] = useState(0);
+
+  // const [totalSeconds, setTotalSeconds] = useState(
+  //   (remainingHours * 3600 + remainingMinutes * 60 + remainingSeconds) /
+  //     (initialHours * 3600 + initialMinutes * 60 + initialSeconds)
+  // );
 
   const nameInputHandler = (e) => {
     e.stopPropagation();
@@ -51,15 +59,18 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
         } else {
           if (remainingSeconds > 0) {
             setRemainingSeconds((seconds) => seconds - 1);
+            // setTotalSeconds((totalSeconds) => totalSeconds - 1);
           } else {
             if (remainingMinutes > 0) {
               setRemainingMinutes((minutes) => minutes - 1);
               setRemainingSeconds((seconds) => (seconds = 59));
+              // setTotalSeconds((totalSeconds) => totalSeconds - 1);
             } else {
               if (remainingHours > 0) {
                 setRemainingHours((hours) => hours - 1);
                 setRemainingMinutes((minutes) => (minutes = 59));
                 setRemainingSeconds((seconds) => (seconds = 59));
+                // setTotalSeconds((totalSeconds) => totalSeconds - 1);
               }
             }
           }
@@ -95,6 +106,14 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
     setRemainingMinutes((state) => state + 1);
   };
 
+  // const totalSeconds = Math.floor(
+  //   (remainingHours * 3600 + remainingMinutes * 60 + remainingSeconds) /
+  //     (initialHours * 3600 + initialMinutes * 60 + initialSeconds)
+  // );
+  // console.log(totalSeconds);
+  const totalRemainingSeconds =
+    remainingHours * 3600 + remainingMinutes * 60 + remainingSeconds;
+
   return (
     <div className="flex justify-center align-middle bg-[var(--color-grey-0)] w-[303px] h-[138px] mx-[5px] mb-[10px] ">
       <div className="w-[45%] h-full">
@@ -105,6 +124,7 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
         {isStart == true && isPaused == true && (
           <button onClick={restartHandler}>Restart</button>
         )}
+        {/* <Pie percentage={totalRemainingSeconds} isPaused={isPaused}></Pie> */}
       </div>
       <div className="flex flex-col justify-center">
         <div className="flex justify-end">
@@ -112,6 +132,9 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
             <button onClick={() => deleteTimer(item.id)}>x</button>
           )}
           {isPaused == true && <button onClick={resetHandler}>RESET</button>}
+          {isPaused == false && isStart == true && (
+            <p className="invisible">BLANK</p>
+          )}
         </div>
         <div className="name">
           <input
