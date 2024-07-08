@@ -148,9 +148,17 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
           {isStart ? (
             <div className="time_display">
               <span className="hours_minutes">
-                {formatTime(remainingHours)}:{formatTime(remainingMinutes)}
+                <span className="text-[3.7584rem]">
+                  {formatTime(remainingHours)}
+                </span>
+                <span>:</span>
+                <span className="text-[3.7584rem]">
+                  {formatTime(remainingMinutes)}
+                </span>
               </span>
-              <span className="seconds">{formatTime(remainingSeconds)}</span>
+              <span className="seconds text-[1.8792rem] relative bottom-[1.2rem]">
+                {formatTime(remainingSeconds)}
+              </span>
             </div>
           ) : (
             <div className="time_input">
