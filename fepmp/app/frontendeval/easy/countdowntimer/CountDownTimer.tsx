@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import AddCountDownTimer from "./AddCountDownTimer";
 import CountDownTimerList from "./CountDownTimerList";
-
+import styled from "styled-components";
 type Props = {};
 
 let id = 1;
@@ -20,14 +20,22 @@ const CountDownTimer = (props: Props) => {
     setTimers(updatedItems);
   };
 
+  const StyledCountDownTimer = styled.div`
+    @media (max-width: 900px) {
+    }
+  `;
+
   return (
     <div>
-      <CountDownTimerList
-        timers={timers}
-        timersLength={timersLength}
-        deleteTimer={deleteTimerHandler}
-      ></CountDownTimerList>
-      <AddCountDownTimer addTimer={addTimerHandler}></AddCountDownTimer>
+      <StyledCountDownTimer>
+        <CountDownTimerList
+          timers={timers}
+          timersLength={timersLength}
+          deleteTimer={deleteTimerHandler}
+          addTimer={addTimerHandler}
+        ></CountDownTimerList>
+        {/* <AddCountDownTimer addTimer={addTimerHandler}></AddCountDownTimer> */}
+      </StyledCountDownTimer>
     </div>
   );
 };
