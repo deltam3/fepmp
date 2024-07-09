@@ -9,9 +9,6 @@ const StyledTimerList = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, 300px);
   gap: 50px;
-
-  @media (min-width: 1200px) {
-  }
 `;
 
 const CountDownTimerList = ({
@@ -29,10 +26,8 @@ const CountDownTimerList = ({
             item={item}
             timersLength={timersLength}
             deleteTimer={deleteTimer}
-            // style={{ width: "100%", minWidth: "0" }}
           />
         ))}
-
         <AddCountDownTimer addTimer={addTimer}></AddCountDownTimer>
       </StyledTimerList>
     </>

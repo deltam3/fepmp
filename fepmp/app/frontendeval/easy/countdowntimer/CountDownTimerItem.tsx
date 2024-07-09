@@ -1,7 +1,5 @@
+"use client";
 import React, { useState, useEffect, useRef } from "react";
-import TimerCircle from "./TimerCircle";
-import CircularProgress from "./TimerCircle";
-import Pie from "@/app/_ui/ProgressBar/Pie";
 
 type Props = {};
 
@@ -22,13 +20,9 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
   const [remainingMinutes, setRemainingMinutes] = useState(0);
   const [remainingSeconds, setRemainingSeconds] = useState(0);
 
-  // const [totalSeconds, setTotalSeconds] = useState(
-  //   (remainingHours * 3600 + remainingMinutes * 60 + remainingSeconds) /
-  //     (initialHours * 3600 + initialMinutes * 60 + initialSeconds)
-  // );
-
   const nameInputHandler = (e) => {
     e.stopPropagation();
+    console.log(item.id);
     setName(e.target.value);
   };
   const hoursInputHandler = (e) => {
@@ -106,14 +100,6 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
     setRemainingMinutes((state) => state + 1);
   };
 
-  // const totalSeconds = Math.floor(
-  //   (remainingHours * 3600 + remainingMinutes * 60 + remainingSeconds) /
-  //     (initialHours * 3600 + initialMinutes * 60 + initialSeconds)
-  // );
-  // console.log(totalSeconds);
-  const totalRemainingSeconds =
-    remainingHours * 3600 + remainingMinutes * 60 + remainingSeconds;
-
   return (
     <div className="flex justify-center align-middle bg-[var(--color-grey-0)] w-[30.3rem] h-[13.8rem] mx-[5px] mb-[10px] ">
       <div className="w-[45%] h-full">
@@ -124,7 +110,6 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
         {isStart == true && isPaused == true && (
           <button onClick={restartHandler}>Restart</button>
         )}
-        {/* <Pie percentage={totalRemainingSeconds} isPaused={isPaused}></Pie> */}
       </div>
       <div className="flex flex-col justify-center">
         <div className="flex justify-end ">
