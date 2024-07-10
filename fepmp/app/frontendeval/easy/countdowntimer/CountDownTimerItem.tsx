@@ -3,41 +3,84 @@ import React, { useState, useEffect, useRef } from "react";
 type Props = {};
 
 const formatTime = (time) => {
-  return time < 10 ? `0${time}` : time;
+  return +time < 10 ? `0${time}` : time;
 };
 
 const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
   const [name, setName] = useState(`Timer ${timersLength}`);
   const [isStart, setIsStart] = useState<boolean>(false);
   const [isPaused, setIsPaused] = useState<boolean>(false);
-  const [initialHours, setInitialHours] = useState(0);
-  const [initialMinutes, setInitialMinutes] = useState(1);
-  const [initialSeconds, setInitialSeconds] = useState(0);
+  const [initialHours, setInitialHours] = useState("");
+  const [initialMinutes, setInitialMinutes] = useState("01");
+  const [initialSeconds, setInitialSeconds] = useState("00");
 
   const intervalRef = useRef(null);
   const [remainingHours, setRemainingHours] = useState(0);
   const [remainingMinutes, setRemainingMinutes] = useState(0);
   const [remainingSeconds, setRemainingSeconds] = useState(0);
 
+  const minInputEl = useRef();
+  const secInputEl = useRef();
+
+  useEffect(() => {
+    const minHandler = (event) => {
+      if (!minInputEl.current) {
+        return;
+      }
+      if (!minInputEl.current.contains(event.target)) {
+        console.log("out");
+        if (+initialMinutes > 59) {
+          console.log("in");
+          setInitialMinutes(59);
+        }
+      }
+    };
+
+    document.addEventListener("click", minHandler);
+
+    return () => {
+      document.removeEventListener("click", minHandler);
+    };
+  });
+
+  useEffect(() => {
+    const secHandler = (event) => {
+      if (!secInputEl.current) {
+        return;
+      }
+      if (!secInputEl.current.contains(event.target)) {
+        if (+initialSeconds > 59) {
+          setInitialSeconds(59);
+        }
+      }
+    };
+
+    document.addEventListener("click", secHandler);
+
+    return () => {
+      document.removeEventListener("click", secHandler);
+    };
+  });
+
   const nameInputHandler = (e) => {
-    e.stopPropagation();
-    console.log(item.id);
+    // e.stopPropagation();
+
     setName(e.target.value);
   };
   const hoursInputHandler = (e) => {
-    e.stopPropagation();
+    // e.stopPropagation();
     const numericValue = e.target.value.replace(/\D/g, "");
-    setInitialHours(numericValue);
+    setInitialHours(`${numericValue}`);
   };
   const minutesInputHandler = (e) => {
-    e.stopPropagation();
+    // e.stopPropagation();
     const numericValue = e.target.value.replace(/\D/g, "");
-    setInitialMinutes(numericValue);
+    setInitialMinutes(`${numericValue}`);
   };
   const secondsInputHandler = (e) => {
-    e.stopPropagation();
+    // e.stopPropagation();
     const numericValue = e.target.value.replace(/\D/g, "");
-    setInitialSeconds(numericValue);
+    setInitialSeconds(`${numericValue}`);
   };
 
   useEffect(() => {
@@ -52,18 +95,15 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
         } else {
           if (remainingSeconds > 0) {
             setRemainingSeconds((seconds) => seconds - 1);
-            // setTotalSeconds((totalSeconds) => totalSeconds - 1);
           } else {
             if (remainingMinutes > 0) {
               setRemainingMinutes((minutes) => minutes - 1);
               setRemainingSeconds((seconds) => (seconds = 59));
-              // setTotalSeconds((totalSeconds) => totalSeconds - 1);
             } else {
               if (remainingHours > 0) {
                 setRemainingHours((hours) => hours - 1);
                 setRemainingMinutes((minutes) => (minutes = 59));
                 setRemainingSeconds((seconds) => (seconds = 59));
-                // setTotalSeconds((totalSeconds) => totalSeconds - 1);
               }
             }
           }
@@ -74,34 +114,37 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
     return () => clearInterval(intervalRef.current);
   }, [remainingHours, remainingMinutes, remainingSeconds, isPaused]);
 
-  const submitTimeHandler = () => {
+  const submitTimeHandler = (e) => {
+    // e.stopPropagation();
     setIsStart(true);
     setRemainingHours(initialHours);
     setRemainingMinutes(initialMinutes);
     setRemainingSeconds(initialSeconds);
   };
 
-  const pauseHandler = () => {
-    // setIsPaused(true);
+  const pauseHandler = (e) => {
+    // e.stopPropagation();
     setIsPaused((paused) => !paused);
     clearInterval(intervalRef.current);
   };
-  const resetHandler = () => {
+  const resetHandler = (e) => {
+    // e.stopPropagation();
     clearInterval(intervalRef.current);
     setIsStart((state) => false);
     setIsPaused((state) => false);
   };
-  const restartHandler = () => {
+  const restartHandler = (e) => {
+    // e.stopPropagation();
     setIsPaused((prev) => !prev);
   };
 
-  const addMinutesHandler = () => {
+  const addMinutesHandler = (e) => {
+    // e.stopPropagation();
     setRemainingMinutes((state) => state + 1);
   };
 
   return (
     <div className="w-full h-[13.8rem] flex justify-between align-middle px-[7rem] gap-[5rem] md:px-0 md:justify-center bg-[var(--color-grey-0)] md:w-[30.3rem] md:h-[13.8rem] md:mx-[5px] md:mb-[10px] ">
-      {/* <div className="w-[45%] h-full"> */}
       <div className="flex align-middle justify-center">
         {isStart == false && <button onClick={submitTimeHandler}>Start</button>}
         {isStart == true && isPaused == false && (
@@ -153,7 +196,8 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
                   pattern="\d*"
                   maxLength={2}
                   placeholder="HH"
-                  value={formatTime(initialHours)}
+                  // value={formatTime(initialHours)}
+                  value={initialHours}
                   onChange={hoursInputHandler}
                   className="font-bold border-none mb-[13.781px] px-[5.512px] py-[2.756px] rounded-[4px] w-[38.5px] text-center text-[rgb(51, 51, 51)] text-[13.7px] bg-[rgb(242, 242, 242)]"
                 />
@@ -163,8 +207,10 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
                   pattern="\d*"
                   maxLength={2}
                   placeholder="MM"
-                  value={formatTime(initialMinutes)}
+                  // value={formatTime(initialMinutes)}
+                  value={initialMinutes}
                   onChange={minutesInputHandler}
+                  ref={minInputEl}
                   className="font-bold border-none mb-[13.781px] px-[5.512px] py-[2.756px] rounded-[4px] w-[38.5px] text-center text-[rgb(51, 51, 51)] text-[13.7px] bg-[rgb(242, 242, 242)]"
                 />
                 <span className="separator">:</span>
@@ -173,8 +219,10 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
                   pattern="\d*"
                   maxLength={2}
                   placeholder="SS"
-                  value={formatTime(initialSeconds)}
+                  // value={formatTime(initialSeconds)}
+                  value={initialSeconds}
                   onChange={secondsInputHandler}
+                  ref={secInputEl}
                   className="font-bold border-none mb-[13.781px] px-[5.512px] py-[2.756px] rounded-[4px] w-[38.5px] text-center text-[rgb(51, 51, 51)] text-[13.7px] bg-[rgb(242, 242, 242)]"
                 />
               </div>
