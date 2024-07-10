@@ -34,11 +34,9 @@ export default function RootLayout({
 
         <StyledComponentsRegistry>
           <GlobalStyles />
-
           <div>
             <div>
               <SideNav />
-
               <main className="flex-1">
                 <MarginWidthWrapper>
                   <Header />

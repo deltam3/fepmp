@@ -6,9 +6,14 @@ import styled from "styled-components";
 import AddCountDownTimer from "./AddCountDownTimer";
 
 const StyledTimerList = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 300px);
-  gap: 50px;
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: 768px) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 300px);
+    gap: 50px;
+  }
 `;
 
 const CountDownTimerList = ({

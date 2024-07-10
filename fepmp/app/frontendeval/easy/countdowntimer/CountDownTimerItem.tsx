@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
-
 type Props = {};
 
 const formatTime = (time) => {
@@ -101,8 +100,9 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
   };
 
   return (
-    <div className="flex justify-center align-middle bg-[var(--color-grey-0)] w-[30.3rem] h-[13.8rem] mx-[5px] mb-[10px] ">
-      <div className="w-[45%] h-full">
+    <div className="w-full h-[13.8rem] flex justify-between align-middle px-[7rem] gap-[5rem] md:px-0 md:justify-center bg-[var(--color-grey-0)] md:w-[30.3rem] md:h-[13.8rem] md:mx-[5px] md:mb-[10px] ">
+      {/* <div className="w-[45%] h-full"> */}
+      <div className="flex align-middle justify-center">
         {isStart == false && <button onClick={submitTimeHandler}>Start</button>}
         {isStart == true && isPaused == false && (
           <button onClick={pauseHandler}>Pause</button>

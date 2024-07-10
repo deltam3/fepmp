@@ -21,6 +21,20 @@ const CountDownTimer = (props: Props) => {
 
   return (
     <div>
+      <div>
+        <ul>
+          <li>
+            <p>Timer Sound & Reset and the time is up</p>
+          </li>
+          <li>
+            <p>Circle Progress Bar</p>
+          </li>
+          <li>
+            <p>Fix the design</p>
+          </li>
+        </ul>
+      </div>
+
       <CountDownTimerList
         timers={timers}
         timersLength={timersLength}
