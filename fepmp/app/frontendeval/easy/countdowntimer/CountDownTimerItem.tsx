@@ -3,7 +3,17 @@ import React, { useState, useEffect, useRef } from "react";
 type Props = {};
 
 const formatTime = (time) => {
-  return +time < 10 ? `0${time}` : time;
+  if (+time == 0) {
+    return "00";
+  }
+
+  if (+time < 10) {
+    let newString = `${time}`;
+    let cleanedStr = newString.replace(/^0+/, "");
+    return `0${cleanedStr}`;
+  } else {
+    return time;
+  }
 };
 
 const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
@@ -45,6 +55,14 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
 
   useEffect(() => {
     const secHandler = (event) => {
+      console.log(
+        typeof remainingHours,
+        typeof remainingMinutes,
+        typeof remainingSeconds
+      );
+      console.log(
+        `${remainingHours}, ${remainingMinutes}, ${remainingSeconds}`
+      );
       if (!secInputEl.current) {
         return;
       }
@@ -87,10 +105,11 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
     if (isPaused == false) {
       intervalRef.current = setInterval(() => {
         if (
-          remainingHours === 0 &&
-          remainingMinutes === 0 &&
+          (remainingHours === "" || remainingHours === "00") &&
+          remainingMinutes === "00" &&
           remainingSeconds === 0
         ) {
+          setIsStart(false);
           clearInterval(intervalRef.current);
         } else {
           if (remainingSeconds > 0) {
@@ -118,6 +137,13 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
     // e.stopPropagation();
     setIsStart(true);
     setRemainingHours(initialHours);
+    // setRemainingHours((prevHours) => {
+    //   if (initialHours === "") {
+    //     prevHours = 0;
+    //   } else {
+    //     prevHours = +initialHours;
+    //   }
+    // });
     setRemainingMinutes(initialMinutes);
     setRemainingSeconds(initialSeconds);
   };
@@ -145,7 +171,7 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
 
   return (
     <div className="w-full h-[13.8rem] flex justify-between align-middle px-[7rem] gap-[5rem] md:px-0 md:justify-center bg-[var(--color-grey-0)] md:w-[30.3rem] md:h-[13.8rem] md:mx-[5px] md:mb-[10px] ">
-      <div className="flex align-middle justify-center">
+      <div className="flex align-middle justify-center w-[25%]">
         {isStart == false && <button onClick={submitTimeHandler}>Start</button>}
         {isStart == true && isPaused == false && (
           <button onClick={pauseHandler}>Pause</button>
@@ -179,14 +205,17 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
                 <span className="hours_minutes">
                   <span className="text-[3.7584rem]">
                     {formatTime(remainingHours)}
+                    {/* {remainingHours} */}
                   </span>
                   <span>:</span>
                   <span className="text-[3.7584rem]">
                     {formatTime(remainingMinutes)}
+                    {/* {remainingMinutes} */}
                   </span>
                 </span>
                 <span className="seconds text-[1.8792rem] relative bottom-[1.2rem] text-[var(--color-grey-400)]">
                   {formatTime(remainingSeconds)}
+                  {/* {remainingSeconds} */}
                 </span>
               </div>
             ) : (
