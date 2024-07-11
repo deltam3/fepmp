@@ -110,6 +110,10 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
           remainingSeconds === 0
         ) {
           setIsStart(false);
+          var audio = new Audio(
+            "https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3"
+          );
+          audio.play();
           clearInterval(intervalRef.current);
         } else {
           if (remainingSeconds > 0) {
