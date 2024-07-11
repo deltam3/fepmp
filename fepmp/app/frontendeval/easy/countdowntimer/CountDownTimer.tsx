@@ -24,7 +24,15 @@ const CountDownTimer = (props: Props) => {
       <div>
         <ul>
           <li>
-            <p>Timer Sound & Reset and the time is up</p>
+            <p style={{ textDecoration: "line-through" }}>
+              Timer Sound & Reset and the time is up
+            </p>
+          </li>
+          <li>
+            <p>
+              Shaking animation when the time is up and waiting until the user
+              presses on the start/pause/restart button
+            </p>
           </li>
           <li>
             <p>Circle Progress Bar</p>
