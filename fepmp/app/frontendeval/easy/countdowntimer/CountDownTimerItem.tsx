@@ -15,6 +15,18 @@ const formatTime = (time) => {
     return time;
   }
 };
+import { CountdownCircleTimer } from "react-countdown-circle-timer";
+const minuteSeconds = 60;
+const hourSeconds = 3600;
+const getTimeSeconds = (time) => (minuteSeconds - time) | 0;
+const getTimeMinutes = (time) => ((time % hourSeconds) / minuteSeconds) | 0;
+// const getTimeHours = (time) => ((time % daySeconds) / hourSeconds) | 0;
+
+const timerProps = {
+  // isPlaying: true,
+  size: 120,
+  strokeWidth: 6,
+};
 
 const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
   const [name, setName] = useState(`Timer ${timersLength}`);
@@ -32,6 +44,15 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
   const minInputEl = useRef();
   const secInputEl = useRef();
 
+  const initialTotalSeconds =
+    +initialHours * hourSeconds +
+    +initialMinutes * minuteSeconds +
+    initialSeconds;
+  const remainingTotalSeconds =
+    remainingHours * hourSeconds +
+    remainingMinutes * minuteSeconds +
+    remainingSeconds;
+
   useEffect(() => {
     const minHandler = (event) => {
       if (!minInputEl.current) {
@@ -39,6 +60,7 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
       }
       if (!minInputEl.current.contains(event.target)) {
         console.log("out");
+
         if (+initialMinutes > 59) {
           console.log("in");
           setInitialMinutes(59);
@@ -55,14 +77,15 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
 
   useEffect(() => {
     const secHandler = (event) => {
-      console.log(
-        typeof remainingHours,
-        typeof remainingMinutes,
-        typeof remainingSeconds
-      );
-      console.log(
-        `${remainingHours}, ${remainingMinutes}, ${remainingSeconds}`
-      );
+      // console.log(+initialTotalSeconds - remainingTotalSeconds);
+      // console.log(
+      //   typeof remainingHours,
+      //   typeof remainingMinutes,
+      //   typeof remainingSeconds
+      // );
+      // console.log(
+      //   `${remainingHours}, ${remainingMinutes}, ${remainingSeconds}`
+      // );
       if (!secInputEl.current) {
         return;
       }
@@ -183,6 +206,31 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
         {isStart == true && isPaused == true && (
           <button onClick={restartHandler}>Restart</button>
         )}
+        <CountdownCircleTimer
+          // {...timerProps}
+          isPlaying={isStart}
+          initialRemainingTime={+initialTotalSeconds}
+          duration={remainingTotalSeconds}
+          colors="#F7B801"
+          colorsTime={[7, 5, 2, 0]}
+        >
+          {/* {({ remainingTime }) => remainingTime} */}
+        </CountdownCircleTimer>
+        {/* <CountdownCircleTimer
+          {...timerProps}
+          colors="#218380"
+          duration={minuteSeconds}
+          initialRemainingTime={remainingTime % minuteSeconds}
+          onComplete={(totalElapsedTime) => ({
+            shouldRepeat: remainingTime - totalElapsedTime > 0,
+          })}
+        >
+          {({ elapsedTime, color }) => (
+            <span style={{ color }}>
+              {renderTime("seconds", getTimeSeconds(elapsedTime))}
+            </span>
+          )}
+        </CountdownCircleTimer> */}
       </div>
       <div className="flex flex-col justify-center">
         <div className="flex justify-end ">
