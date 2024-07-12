@@ -24,7 +24,7 @@ const getTimeMinutes = (time) => ((time % hourSeconds) / minuteSeconds) | 0;
 
 const timerProps = {
   // isPlaying: true,
-  size: 120,
+  size: 100,
   strokeWidth: 6,
 };
 
@@ -207,12 +207,11 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
           <button onClick={restartHandler}>Restart</button>
         )}
         <CountdownCircleTimer
-          // {...timerProps}
-          isPlaying={isStart}
+          {...timerProps}
+          isPlaying={isStart && !isPaused}
           initialRemainingTime={+initialTotalSeconds}
           duration={remainingTotalSeconds}
           colors="#F7B801"
-          colorsTime={[7, 5, 2, 0]}
         >
           {/* {({ remainingTime }) => remainingTime} */}
         </CountdownCircleTimer>
