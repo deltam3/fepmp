@@ -199,37 +199,38 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
   return (
     <div className="w-full h-[13.8rem] flex justify-between align-middle px-[7rem] gap-[5rem] md:px-0 md:justify-center bg-[var(--color-grey-0)] md:w-[30.3rem] md:h-[13.8rem] md:mx-[5px] md:mb-[10px] ">
       <div className="flex align-middle justify-center w-[25%]">
-        {isStart == false && <button onClick={submitTimeHandler}>Start</button>}
+        {/* {isStart == false && <button onClick={submitTimeHandler}>Start</button>}
         {isStart == true && isPaused == false && (
           <button onClick={pauseHandler}>Pause</button>
         )}
         {isStart == true && isPaused == true && (
           <button onClick={restartHandler}>Restart</button>
-        )}
+        )} */}
+
         <CountdownCircleTimer
           {...timerProps}
           isPlaying={isStart && !isPaused}
           initialRemainingTime={+initialTotalSeconds}
           duration={remainingTotalSeconds}
           colors="#F7B801"
-        >
-          {/* {({ remainingTime }) => remainingTime} */}
-        </CountdownCircleTimer>
-        {/* <CountdownCircleTimer
-          {...timerProps}
-          colors="#218380"
-          duration={minuteSeconds}
-          initialRemainingTime={remainingTime % minuteSeconds}
-          onComplete={(totalElapsedTime) => ({
-            shouldRepeat: remainingTime - totalElapsedTime > 0,
-          })}
+          // onComplete={(totalElapsedTime) => ({
+          //   shouldRepeat: remainingTime - totalElapsedTime > 0,
+          // })}
         >
           {({ elapsedTime, color }) => (
             <span style={{ color }}>
-              {renderTime("seconds", getTimeSeconds(elapsedTime))}
+              {isStart == false && (
+                <button onClick={submitTimeHandler}>Start</button>
+              )}
+              {isStart == true && isPaused == false && (
+                <button onClick={pauseHandler}>Pause</button>
+              )}
+              {isStart == true && isPaused == true && (
+                <button onClick={restartHandler}>Restart</button>
+              )}
             </span>
           )}
-        </CountdownCircleTimer> */}
+        </CountdownCircleTimer>
       </div>
       <div className="flex flex-col justify-center">
         <div className="flex justify-end ">
