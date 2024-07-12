@@ -39,6 +39,10 @@ const CountDownTimer = (props: Props) => {
               Bug Fix: When the timer is used twice or more the timer is no
               longer working
             </p>
+            <p>
+              Bug Fix: When the timer is set to less than 1 minute the timer
+              doesn't work correctly
+            </p>
           </li>
           <li>
             <p style={{ textDecoration: "line-through" }}>Fix the design</p>

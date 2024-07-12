@@ -45,13 +45,13 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
   const secInputEl = useRef();
 
   const initialTotalSeconds =
-    +initialHours * hourSeconds +
-    +initialMinutes * minuteSeconds +
-    initialSeconds;
+    +initialHours * +hourSeconds +
+    +initialMinutes * +minuteSeconds +
+    +initialSeconds;
   const remainingTotalSeconds =
-    remainingHours * hourSeconds +
-    remainingMinutes * minuteSeconds +
-    remainingSeconds;
+    +remainingHours * +hourSeconds +
+    +remainingMinutes * +minuteSeconds +
+    +remainingSeconds;
 
   useEffect(() => {
     const minHandler = (event) => {
@@ -214,9 +214,6 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
           initialRemainingTime={+initialTotalSeconds}
           duration={+remainingTotalSeconds}
           colors="#F7B801"
-          // onComplete={(totalElapsedTime) => ({
-          //   shouldRepeat: remainingTime - totalElapsedTime > 0,
-          // })}
         >
           {({ elapsedTime, color }) => (
             <span style={{ color }}>
