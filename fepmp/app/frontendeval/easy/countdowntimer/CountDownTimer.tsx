@@ -35,10 +35,13 @@ const CountDownTimer = (props: Props) => {
             </p>
           </li>
           <li>
-            <p>Circle Progress Bar</p>
+            <p>
+              Bug Fix: When the timer is used twice or more the timer is no
+              longer working
+            </p>
           </li>
           <li>
-            <p>Fix the design</p>
+            <p style={{ textDecoration: "line-through" }}>Fix the design</p>
           </li>
         </ul>
       </div>

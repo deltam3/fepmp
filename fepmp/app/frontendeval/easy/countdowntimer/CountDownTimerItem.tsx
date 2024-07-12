@@ -212,7 +212,7 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
           {...timerProps}
           isPlaying={isStart && !isPaused}
           initialRemainingTime={+initialTotalSeconds}
-          duration={remainingTotalSeconds}
+          duration={+remainingTotalSeconds}
           colors="#F7B801"
           // onComplete={(totalElapsedTime) => ({
           //   shouldRepeat: remainingTime - totalElapsedTime > 0,
