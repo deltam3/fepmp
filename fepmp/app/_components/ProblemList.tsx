@@ -29,11 +29,25 @@ const ProblemsList = [
   },
 ];
 
+const MediumProblemsList = [
+  {
+    id: 1,
+    link: "/frontendeval/medium/memorygame",
+    title: "Memory Game",
+    description: "Create a card-matching memory game",
+  },
+];
+
 const ProblemList = () => {
   return (
     <div>
       <ul className="grid grid-cols-3 gap-[1.6rem]">
         {ProblemsList.map((item) => {
+          return <ProblemItem key={item.id} item={item}></ProblemItem>;
+        })}
+      </ul>
+      <ul className="grid grid-cols-3 gap-[1.6rem]">
+        {MediumProblemsList.map((item) => {
           return <ProblemItem key={item.id} item={item}></ProblemItem>;
         })}
       </ul>

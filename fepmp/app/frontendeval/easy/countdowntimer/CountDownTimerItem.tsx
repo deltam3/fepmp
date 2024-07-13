@@ -211,7 +211,7 @@ const CountDownTimerItem = ({ item, timersLength, deleteTimer }: Props) => {
         <CountdownCircleTimer
           {...timerProps}
           isPlaying={isStart && !isPaused}
-          initialRemainingTime={+initialTotalSeconds}
+          // initialRemainingTime={+initialTotalSeconds}
           duration={+remainingTotalSeconds}
           colors="#F7B801"
         >
