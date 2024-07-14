@@ -3,18 +3,13 @@ import Button from "@/app/_ui/Button/Button";
 import React, { useState } from "react";
 import MemoryGame from "./MemoryGame";
 
-// function setGameItems () {
-//   if
-
-// }
-
 const fivebyfive = [];
 const sixbysix = [];
 const eightbyeight = [];
 
 const page = () => {
   const [gameItems, setGameItems] = useState([{}]);
-  const [isStart, setIsStart] = useState();
+  const [isStart, setIsStart] = useState(false);
   return (
     <>
       <h1>Memory Game</h1>
@@ -25,9 +20,7 @@ const page = () => {
           <Button>Hard 8*8</Button>
         </div>
       </div>
-      <main>
-        <MemoryGame />
-      </main>
+      <main>{isStart && <MemoryGame />}</main>
     </>
   );
 };
