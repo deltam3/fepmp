@@ -1,11 +1,20 @@
 import React from "react";
 
 type Props = {
-  difficulty: number;
+  gameItems: any;
 };
 
-const MemoryGame = ({ difficulty }: Props) => {
-  return <h1>MemoryGameItems: {difficulty}</h1>;
+const MemoryGame = ({ gameItems }: Props) => {
+  return (
+    <>
+      <h1>MemoryGameItems {gameItems.length}</h1>
+      <section>
+        {gameItems.map((item) => {
+          return <h1 key={item.id}>{item.item}</h1>;
+        })}
+      </section>
+    </>
+  );
 };
 
 export default MemoryGame;

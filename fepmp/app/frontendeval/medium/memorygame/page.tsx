@@ -3,18 +3,30 @@ import Button from "@/app/_ui/Button/Button";
 import React, { useState } from "react";
 import MemoryGame from "./MemoryGame";
 
-const fivebyfive = [];
-const sixbysix = [];
-const eightbyeight = [];
+let idCount = 0;
+
+function createPairs(n) {
+  let pairs = [];
+  for (let i = 1; i <= n; i++) {
+    pairs.push({ id: idCount, item: i });
+    idCount += 1;
+    pairs.push({ id: idCount, item: i });
+    idCount += 1;
+  }
+  for (let i = pairs.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pairs[i], pairs[j]] = [pairs[j], pairs[i]];
+  }
+  return pairs;
+}
 
 const page = () => {
-  const [gameItems, setGameItems] = useState([{}]);
   const [isStart, setIsStart] = useState(false);
-  const [difficulty, setDifficulty] = useState(0);
+  const [gameItems, setGameItems] = useState(0);
 
   const difficultyHandler = (difficultyNumber: number) => {
     setIsStart(true);
-    setDifficulty(difficultyNumber);
+    setGameItems(() => createPairs(difficultyNumber));
   };
 
   return (
@@ -29,7 +41,7 @@ const page = () => {
           </div>
         )}
       </div>
-      <main>{isStart && <MemoryGame difficulty={difficulty} />}</main>
+      <main>{isStart && <MemoryGame gameItems={gameItems} />}</main>
     </>
   );
 };
