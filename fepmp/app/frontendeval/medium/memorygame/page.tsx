@@ -20,9 +20,9 @@ const page = () => {
   return (
     <>
       <h1 className="text-center">Memory Game</h1>
-      <div>
+      <div className="">
         {!isStart && (
-          <div>
+          <div className="flex gap-[1rem] justify-center">
             <Button onClick={() => difficultyHandler(5)}>Easy 5*5</Button>
             <Button onClick={() => difficultyHandler(6)}>Medium 6*6</Button>
             <Button onClick={() => difficultyHandler(8)}>Hard 8*8</Button>
