@@ -7,7 +7,7 @@ let idCount = 0;
 
 function createPairs(n) {
   let pairs = [];
-  for (let i = 1; i <= n; i++) {
+  for (let i = 1; i <= (n * n) / 2; i++) {
     pairs.push({ id: idCount, item: i });
     idCount += 1;
     pairs.push({ id: idCount, item: i });
@@ -35,7 +35,7 @@ const page = () => {
       <div className="">
         {!isStart && (
           <div className="flex gap-[1rem] justify-center">
-            <Button onClick={() => difficultyHandler(5)}>Easy 5*5</Button>
+            <Button onClick={() => difficultyHandler(4)}>Easy 4*4</Button>
             <Button onClick={() => difficultyHandler(6)}>Medium 6*6</Button>
             <Button onClick={() => difficultyHandler(8)}>Hard 8*8</Button>
           </div>

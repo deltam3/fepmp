@@ -2,8 +2,14 @@ import React from "react";
 
 type Props = {};
 
-const MemoryGameItem = ({}: Props) => {
-  return <div>MemoryGameItem</div>;
+const MemoryGameItem = ({ item }: Props) => {
+  return (
+    <div>
+      <div>
+        <p>{item.item}</p>
+      </div>
+    </div>
+  );
 };
 
 export default MemoryGameItem;
