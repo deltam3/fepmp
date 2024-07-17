@@ -5,7 +5,12 @@ import MemoryGame from "./MemoryGame";
 
 let idCount = 0;
 
-function createPairs(n) {
+interface Pair {
+  id: number;
+  item: number;
+}
+
+function createPairs(n: number): Pair[] {
   let pairs = [];
   for (let i = 1; i <= (n * n) / 2; i++) {
     pairs.push({ id: idCount, item: i });
@@ -22,11 +27,12 @@ function createPairs(n) {
 
 const page = () => {
   const [isStart, setIsStart] = useState(false);
-  const [gameItems, setGameItems] = useState(0);
+  const [gameItems, setGameItems] = useState<Pair[]>([]);
 
   const difficultyHandler = (difficultyNumber: number) => {
     setIsStart(true);
-    setGameItems(() => createPairs(difficultyNumber));
+    const pairs = createPairs(difficultyNumber);
+    setGameItems(pairs);
   };
 
   return (
