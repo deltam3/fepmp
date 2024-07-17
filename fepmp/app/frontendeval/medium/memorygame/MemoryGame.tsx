@@ -1,8 +1,10 @@
 import React from "react";
 import MemoryGameItem from "./MemoryGameItem";
 import styled from "styled-components";
+import { Pair } from "./page";
 type Props = {
-  gameItems: any;
+  gameItems: Pair[];
+  setGameItems: (item: Pair) => void;
 };
 
 const StyledEasyLayout = styled.div`
@@ -32,7 +34,7 @@ const StyledHardLayout = styled.div`
   height: 500px;
 `;
 
-const MemoryGame = ({ gameItems }: Props) => {
+const MemoryGame = ({ gameItems, setGameItems }: Props) => {
   const gameLength = gameItems.length;
   const isEasy = gameLength == 16;
   const isMedium = gameLength == 36;
@@ -45,7 +47,11 @@ const MemoryGame = ({ gameItems }: Props) => {
         {isEasy && (
           <StyledEasyLayout>
             {gameItems.map((item) => (
-              <MemoryGameItem key={item.id} item={item}></MemoryGameItem>
+              <MemoryGameItem
+                key={item.id}
+                item={item}
+                setGameItems={setGameItems}
+              ></MemoryGameItem>
             ))}
           </StyledEasyLayout>
         )}
@@ -53,7 +59,11 @@ const MemoryGame = ({ gameItems }: Props) => {
         {isMedium && (
           <StyledMediumLayout>
             {gameItems.map((item) => (
-              <MemoryGameItem key={item.id} item={item}></MemoryGameItem>
+              <MemoryGameItem
+                key={item.id}
+                item={item}
+                setGameItems={setGameItems}
+              ></MemoryGameItem>
             ))}
           </StyledMediumLayout>
         )}
@@ -61,7 +71,11 @@ const MemoryGame = ({ gameItems }: Props) => {
         {isHard && (
           <StyledHardLayout>
             {gameItems.map((item) => (
-              <MemoryGameItem key={item.id} item={item}></MemoryGameItem>
+              <MemoryGameItem
+                key={item.id}
+                item={item}
+                setGameItems={setGameItems}
+              ></MemoryGameItem>
             ))}
           </StyledHardLayout>
         )}

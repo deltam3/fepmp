@@ -1,14 +1,25 @@
 import React from "react";
+import { Pair } from "./page";
+import styled from "styled-components";
 
-type Props = {};
+type Props = {
+  item: Pair;
+  setGameItems: (item: Pair) => void;
+};
 
-const MemoryGameItem = ({ item }: Props) => {
+const StyledGameItem = styled.div`
+  /* background-color: red; */
+  width: 10rem;
+  height: 20rem;
+`;
+
+const MemoryGameItem = ({ item, setGameItems }: Props) => {
   return (
-    <div>
-      <div>
-        <p>{item.item}</p>
-      </div>
-    </div>
+    <StyledGameItem onClick={() => setGameItems(item)}>
+      <div>{item.isDone && <p>Done</p>}</div>
+      <div>{!item.isOpen && <p>?</p>}</div>
+      <div>{item.isOpen && <p>{item.item}</p>}</div>
+    </StyledGameItem>
   );
 };
 
