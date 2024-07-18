@@ -15,11 +15,13 @@ const StyledGameItem = styled.div`
 
 const MemoryGameItem = ({ item, setGameItems }: Props) => {
   return (
-    <StyledGameItem onClick={() => setGameItems(item)}>
-      <div>{item.isDone && <p>Done</p>}</div>
-      <div>{!item.isOpen && <p>?</p>}</div>
-      <div>{item.isOpen && <p>{item.item}</p>}</div>
-    </StyledGameItem>
+    <>
+      <StyledGameItem onClick={() => setGameItems(item)}>
+        <div>{item.isDone && <p>Done</p>}</div>
+        <div>{!item.isOpen && <p>?</p>}</div>
+        <div>{item.isOpen && <p>{item.item}</p>}</div>
+      </StyledGameItem>
+    </>
   );
 };
 

@@ -42,7 +42,6 @@ const MemoryGame = ({ gameItems, setGameItems }: Props) => {
 
   return (
     <>
-      <h1>MemoryGameItems {gameItems.length}</h1>
       <section>
         {isEasy && (
           <StyledEasyLayout>

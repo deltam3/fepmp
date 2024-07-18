@@ -1,6 +1,6 @@
 "use client";
 import Button from "@/app/_ui/Button/Button";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import MemoryGame from "./MemoryGame";
 
 let idCount = 0;
@@ -27,6 +27,11 @@ function createPairs(n: number): Pair[] {
   return pairs;
 }
 
+function countOpenItems(array) {
+  let openItems = array.filter((item) => item.isOpen === true);
+  return openItems.length;
+}
+
 const page = () => {
   const [isStart, setIsStart] = useState(false);
   const [gameItems, setGameItems] = useState<Pair[]>([]);
@@ -37,12 +42,13 @@ const page = () => {
     setGameItems(pairs);
   };
 
-  let openCount = 0;
+  let openCount = countOpenItems(gameItems);
   const openItem1 = useRef<any>(null);
   const openItem2 = useRef<any>(null);
 
   const onClickHandler = (selectedItem: Pair) => {
     if (openCount === 0) {
+      console.log("0");
       openItem1.current = selectedItem;
       const openedOneData = gameItems.map((item) => {
         if (item.id === selectedItem.id) {
@@ -53,8 +59,9 @@ const page = () => {
       openCount = 1;
       setGameItems(openedOneData);
     } else if (openCount === 1) {
-      console.log(openItem1, openItem2);
+      console.log("1");
       openItem2.current = selectedItem;
+      openCount = 2;
       // isOpen인 2개가 같으면
       if (openItem1.current.item === openItem2.current.item) {
         const openedTwoDoneData = gameItems.map((item) => {
@@ -96,7 +103,7 @@ const page = () => {
           </div>
         )}
       </div>
-      <main>
+      <main className="flex justify-center">
         {isStart && (
           <MemoryGame gameItems={gameItems} setGameItems={onClickHandler} />
         )}
