@@ -14,14 +14,20 @@ const StyledGameItem = styled.div`
 `;
 
 const MemoryGameItem = ({ item, setGameItems }: Props) => {
+  const classes = {
+    visiblity: "hidden",
+  };
   return (
-    <>
-      <StyledGameItem onClick={() => setGameItems(item)}>
-        <div>{item.isDone && <p>Done</p>}</div>
-        <div>{!item.isOpen && <p>?</p>}</div>
-        <div>{item.isOpen && <p>{item.item}</p>}</div>
-      </StyledGameItem>
-    </>
+    <div
+      onClick={() => setGameItems(item)}
+      className={`${item.isDone ? classes : ""}`}
+    >
+      {/* <StyledGameItem onClick={() => setGameItems(item)}> */}
+      {/* <div>{item.isDone && <p>Done</p>}</div> */}
+      <div>{!item.isOpen && <p>?</p>}</div>
+      <div>{item.isOpen && <p>{item.item}</p>}</div>
+      {/* </StyledGameItem> */}
+    </div>
   );
 };
 
