@@ -32,7 +32,7 @@ function countOpenItems(array) {
   return openItems.length;
 }
 
-const page = () => {
+const Page = () => {
   const [isStart, setIsStart] = useState(false);
   const [gameItems, setGameItems] = useState<Pair[]>([]);
 
@@ -48,8 +48,12 @@ const page = () => {
   let openItem1 = useRef<any>(null);
   let openItem2 = useRef<any>(null);
 
+  useEffect(() => {
+    // console.log("log");
+  }, []);
+
   const onClickHandler = (selectedItem: Pair) => {
-    if (openCount.current === 0) {
+    if (openCount.current === 0 && openItem1.current === null) {
       console.log("0");
       openItem1.current = { ...selectedItem, isOpen: true };
       const openedOneData = gameItems.map((item) => {
@@ -62,7 +66,7 @@ const page = () => {
 
       setGameItems(openedOneData);
       console.log(openItem1, openItem2, openCount.current);
-    } else if (openCount.current === 1) {
+    } else if (openCount.current === 1 && openItem2.current === null) {
       console.log("1");
       openItem2.current = { ...selectedItem, isOpen: true };
       console.log(openItem1, openItem2);
@@ -70,31 +74,36 @@ const page = () => {
       openCount.current = 2;
       // isOpen인 2개가 같으면
       if (openItem1.current.item === openItem2.current.item) {
-        console.log("1-1");
+        console.log("1-1: same");
         const openedTwoDoneData = gameItems.map((item) => {
           if (item.id === openItem1.current.id || openItem2.current.id) {
             return { ...item, isOpen: false, isDone: true };
           }
           return item;
         });
+        setTimeout(() => {
+          setGameItems(openedTwoDoneData);
+        }, 3000);
         openItem1.current = null;
         openItem2.current = null;
         openCount.current = 0;
-        setGameItems(openedTwoDoneData);
       }
       // isOpen인 2개가 다르면
       if (openItem1.current.item !== openItem2.current.item) {
-        console.log("1-2");
+        console.log("1-2: not same");
         const openedTwoNotDoneData = gameItems.map((item) => {
           if (item.id === openItem1.current.id || openItem2.current.id) {
             return { ...item, isOpen: false };
           }
           return item;
         });
+        setTimeout(() => {
+          setGameItems(openedTwoNotDoneData);
+        }, 3000);
         openItem1.current = null;
         openItem2.current = null;
         openCount.current = 0;
-        setGameItems(openedTwoNotDoneData);
+        // setGameItems(openedTwoNotDoneData);
       }
     }
   };
@@ -120,4 +129,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

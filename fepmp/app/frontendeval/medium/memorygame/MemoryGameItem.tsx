@@ -8,9 +8,14 @@ type Props = {
 };
 
 const StyledGameItem = styled.div`
-  /* background-color: red; */
+  background-color: red;
+  color: white;
   width: 10rem;
   height: 20rem;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const MemoryGameItem = ({ item, setGameItems }: Props) => {
@@ -18,16 +23,14 @@ const MemoryGameItem = ({ item, setGameItems }: Props) => {
     visiblity: "hidden",
   };
   return (
-    <div
+    <StyledGameItem
       onClick={() => setGameItems(item)}
       className={`${item.isDone ? classes : ""}`}
     >
-      {/* <StyledGameItem onClick={() => setGameItems(item)}> */}
       {/* <div>{item.isDone && <p>Done</p>}</div> */}
-      <div>{!item.isOpen && <p>?</p>}</div>
-      <div>{item.isOpen && <p>{item.item}</p>}</div>
-      {/* </StyledGameItem> */}
-    </div>
+      {/* <div>{!item.isOpen && <p>?</p>}</div> */}
+      <div>{!item.isOpen && <p>{item.item}</p>}</div>
+    </StyledGameItem>
   );
 };
 
