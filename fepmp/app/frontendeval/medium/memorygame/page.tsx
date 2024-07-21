@@ -48,50 +48,52 @@ const Page = () => {
   let openItem1 = useRef<any>(null);
   let openItem2 = useRef<any>(null);
 
-  useEffect(() => {
-    console.log(openItem1, openItem2);
-    setTimeout(() => {
-      if (
-        openItem1.current?.number !== undefined &&
-        openItem2.current?.number !== undefined &&
-        openItem1.current?.number === openItem2.current?.number
-      ) {
-        const result = gameItems.map((item) => {
-          if (
-            item?.id === openItem1.current?.id ||
-            item?.id === openItem2.current?.id
-          ) {
-            return { ...item, revealed: false, paired: true };
-          }
-          return item;
-        });
-        openItem1.current = undefined;
-        openItem2.current = undefined;
-        openCount.current = 0;
+  // useEffect(() => {
+  //   console.log(openItem1, openItem2);
+  //   setTimeout(() => {
+  //     if (
+  //       openItem1.current?.number !== undefined &&
+  //       openItem2.current?.number !== undefined &&
+  //       openItem1.current?.id !== openItem2.current?.id &&
+  //       openItem1.current?.number === openItem2.current?.number
+  //     ) {
+  //       const result = gameItems.map((item) => {
+  //         if (
+  //           item?.id === openItem1.current?.id ||
+  //           item?.id === openItem2.current?.id
+  //         ) {
+  //           return { ...item, revealed: false, paired: true };
+  //         }
+  //         return item;
+  //       });
+  //       openItem1.current = undefined;
+  //       openItem2.current = undefined;
+  //       openCount.current = 0;
 
-        setGameItems(result);
-      }
-      if (
-        openItem1.current?.number !== undefined &&
-        openItem2.current?.number !== undefined &&
-        openItem1.current?.number !== openItem2.current?.number
-      ) {
-        const result = gameItems.map((item) => {
-          if (
-            item.id === openItem1.current?.id ||
-            item.id === openItem2.current?.id
-          ) {
-            return { ...item, revealed: true, paired: false };
-          }
-          return item;
-        });
-        openItem1.current = undefined;
-        openItem2.current = undefined;
-        openCount.current = 0;
-        setGameItems(result);
-      }
-    }, 2000);
-  });
+  //       setGameItems(result);
+  //     }
+  //     if (
+  //       openItem1.current?.number !== undefined &&
+  //       openItem2.current?.number !== undefined &&
+  //       openItem1.current?.id !== openItem2.current?.id &&
+  //       openItem1.current?.number !== openItem2.current?.number
+  //     ) {
+  //       const result = gameItems.map((item) => {
+  //         if (
+  //           item.id === openItem1.current?.id ||
+  //           item.id === openItem2.current?.id
+  //         ) {
+  //           return { ...item, revealed: true, paired: false };
+  //         }
+  //         return item;
+  //       });
+  //       openItem1.current = undefined;
+  //       openItem2.current = undefined;
+  //       openCount.current = 0;
+  //       setGameItems(result);
+  //     }
+  //   }, 2000);
+  // });
 
   const onClickHandler = (selectedItem: Pair) => {
     if (openCount.current === 0 && openItem1.current === null) {
@@ -110,14 +112,17 @@ const Page = () => {
     } else if (openCount.current === 1 && openItem2.current === null) {
       console.log("1");
       openItem2.current = { ...selectedItem, isOpen: true };
-      console.log(openItem1, openItem2);
+      console.log(openItem1.current, openItem2.current, openCount.current);
 
       openCount.current = 2;
       // isOpen인 2개가 같으면
       if (openItem1.current.item === openItem2.current.item) {
         console.log("1-1: same");
         const openedTwoDoneData = gameItems.map((item) => {
-          if (item.id === openItem1.current.id || openItem2.current.id) {
+          if (
+            item.id === openItem1.current.id ||
+            item.id === openItem2.current.id
+          ) {
             return { ...item, isOpen: false, isDone: true };
           }
           return item;
