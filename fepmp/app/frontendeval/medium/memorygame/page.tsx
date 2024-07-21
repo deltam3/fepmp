@@ -96,7 +96,8 @@ const Page = () => {
   // });
 
   const onClickHandler = (selectedItem: Pair) => {
-    if (openCount.current === 0 && openItem1.current === null) {
+    if (openCount.current === 0 && openItem1.current !== 1) {
+      console.log(selectedItem);
       console.log("0");
       openItem1.current = { ...selectedItem, isOpen: true };
       const openedOneData = gameItems.map((item) => {
@@ -110,6 +111,9 @@ const Page = () => {
       setGameItems(openedOneData);
       console.log(openItem1, openItem2, openCount.current);
     } else if (openCount.current === 1 && openItem2.current === null) {
+      if (selectedItem.id === openItem1.current.id) {
+        return;
+      }
       console.log("1");
       openItem2.current = { ...selectedItem, isOpen: true };
       console.log(openItem1.current, openItem2.current, openCount.current);
