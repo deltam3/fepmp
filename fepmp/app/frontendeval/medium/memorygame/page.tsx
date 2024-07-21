@@ -48,53 +48,6 @@ const Page = () => {
   let openItem1 = useRef<any>(null);
   let openItem2 = useRef<any>(null);
 
-  // useEffect(() => {
-  //   console.log(openItem1, openItem2);
-  //   setTimeout(() => {
-  //     if (
-  //       openItem1.current?.number !== undefined &&
-  //       openItem2.current?.number !== undefined &&
-  //       openItem1.current?.id !== openItem2.current?.id &&
-  //       openItem1.current?.number === openItem2.current?.number
-  //     ) {
-  //       const result = gameItems.map((item) => {
-  //         if (
-  //           item?.id === openItem1.current?.id ||
-  //           item?.id === openItem2.current?.id
-  //         ) {
-  //           return { ...item, revealed: false, paired: true };
-  //         }
-  //         return item;
-  //       });
-  //       openItem1.current = undefined;
-  //       openItem2.current = undefined;
-  //       openCount.current = 0;
-
-  //       setGameItems(result);
-  //     }
-  //     if (
-  //       openItem1.current?.number !== undefined &&
-  //       openItem2.current?.number !== undefined &&
-  //       openItem1.current?.id !== openItem2.current?.id &&
-  //       openItem1.current?.number !== openItem2.current?.number
-  //     ) {
-  //       const result = gameItems.map((item) => {
-  //         if (
-  //           item.id === openItem1.current?.id ||
-  //           item.id === openItem2.current?.id
-  //         ) {
-  //           return { ...item, revealed: true, paired: false };
-  //         }
-  //         return item;
-  //       });
-  //       openItem1.current = undefined;
-  //       openItem2.current = undefined;
-  //       openCount.current = 0;
-  //       setGameItems(result);
-  //     }
-  //   }, 2000);
-  // });
-
   const onClickHandler = (selectedItem: Pair) => {
     if (openCount.current === 0 && openItem1.current !== 1) {
       console.log(selectedItem);
@@ -111,6 +64,7 @@ const Page = () => {
       setGameItems(openedOneData);
       console.log(openItem1, openItem2, openCount.current);
     } else if (openCount.current === 1 && openItem2.current === null) {
+      // 하나 오픈된 상태에서 같은 아이템 여러번 누르면 무시
       if (selectedItem.id === openItem1.current.id) {
         return;
       }
@@ -118,9 +72,24 @@ const Page = () => {
       openItem2.current = { ...selectedItem, isOpen: true };
       console.log(openItem1.current, openItem2.current, openCount.current);
 
+      const openedTwoData = gameItems.map((item) => {
+        if (item.id === selectedItem.id) {
+          return { ...item, isOpen: true };
+        }
+        return item;
+      });
+      setGameItems(openedTwoData);
+
       openCount.current = 2;
-      // isOpen인 2개가 같으면
-      if (openItem1.current.item === openItem2.current.item) {
+    }
+  };
+
+  useEffect(() => {
+    console.log("USEEFFECT");
+    console.log(openCount);
+    if (openCount.current === 2) {
+      console.log("TWO INSIDE");
+      if (openItem1.current?.item === openItem2.current?.item) {
         console.log("1-1: same");
         const openedTwoDoneData = gameItems.map((item) => {
           if (
@@ -138,11 +107,14 @@ const Page = () => {
         openItem2.current = null;
         openCount.current = 0;
       }
-      // isOpen인 2개가 다르면
-      if (openItem1.current.item !== openItem2.current.item) {
+      if (openItem1.current?.item !== openItem2.current?.item) {
         console.log("1-2: not same");
+
         const openedTwoNotDoneData = gameItems.map((item) => {
-          if (item.id === openItem1.current.id || openItem2.current.id) {
+          if (item.id === openItem1.current.id) {
+            return { ...item, isOpen: false };
+          }
+          if (item.id === openItem2.current.id) {
             return { ...item, isOpen: false };
           }
           return item;
@@ -156,7 +128,7 @@ const Page = () => {
         // setGameItems(openedTwoNotDoneData);
       }
     }
-  };
+  }, [gameItems]);
 
   return (
     <>
@@ -170,6 +142,7 @@ const Page = () => {
           </div>
         )}
       </div>
+
       <main className="flex justify-center">
         {isStart && (
           <MemoryGame gameItems={gameItems} setGameItems={onClickHandler} />
