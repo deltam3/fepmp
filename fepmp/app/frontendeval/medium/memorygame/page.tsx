@@ -49,6 +49,8 @@ const Page = () => {
   let openItem2 = useRef<any>(null);
 
   const onClickHandler = (selectedItem: Pair) => {
+    // if
+
     if (openCount.current === 0 && openItem1.current !== 1) {
       console.log(selectedItem);
       console.log("0");
@@ -102,10 +104,10 @@ const Page = () => {
         });
         setTimeout(() => {
           setGameItems(openedTwoDoneData);
+          openItem1.current = null;
+          openItem2.current = null;
+          openCount.current = 0;
         }, 3000);
-        openItem1.current = null;
-        openItem2.current = null;
-        openCount.current = 0;
       }
       if (openItem1.current?.item !== openItem2.current?.item) {
         console.log("1-2: not same");
@@ -121,10 +123,11 @@ const Page = () => {
         });
         setTimeout(() => {
           setGameItems(openedTwoNotDoneData);
+          openItem1.current = null;
+          openItem2.current = null;
+          openCount.current = 0;
         }, 3000);
-        openItem1.current = null;
-        openItem2.current = null;
-        openCount.current = 0;
+
         // setGameItems(openedTwoNotDoneData);
       }
     }
