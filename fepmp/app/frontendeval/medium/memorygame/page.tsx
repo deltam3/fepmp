@@ -49,8 +49,49 @@ const Page = () => {
   let openItem2 = useRef<any>(null);
 
   useEffect(() => {
-    // console.log("log");
-  }, []);
+    console.log(openItem1, openItem2);
+    setTimeout(() => {
+      if (
+        openItem1.current?.number !== undefined &&
+        openItem2.current?.number !== undefined &&
+        openItem1.current?.number === openItem2.current?.number
+      ) {
+        const result = gameItems.map((item) => {
+          if (
+            item?.id === openItem1.current?.id ||
+            item?.id === openItem2.current?.id
+          ) {
+            return { ...item, revealed: false, paired: true };
+          }
+          return item;
+        });
+        openItem1.current = undefined;
+        openItem2.current = undefined;
+        openCount.current = 0;
+
+        setGameItems(result);
+      }
+      if (
+        openItem1.current?.number !== undefined &&
+        openItem2.current?.number !== undefined &&
+        openItem1.current?.number !== openItem2.current?.number
+      ) {
+        const result = gameItems.map((item) => {
+          if (
+            item.id === openItem1.current?.id ||
+            item.id === openItem2.current?.id
+          ) {
+            return { ...item, revealed: true, paired: false };
+          }
+          return item;
+        });
+        openItem1.current = undefined;
+        openItem2.current = undefined;
+        openCount.current = 0;
+        setGameItems(result);
+      }
+    }, 2000);
+  });
 
   const onClickHandler = (selectedItem: Pair) => {
     if (openCount.current === 0 && openItem1.current === null) {

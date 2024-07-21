@@ -27,9 +27,9 @@ const MemoryGameItem = ({ item, setGameItems }: Props) => {
       onClick={() => setGameItems(item)}
       className={`${item.isDone ? classes : ""}`}
     >
-      {/* <div>{item.isDone && <p>Done</p>}</div> */}
+      <div>{item.isOpen && item.isDone && <p>Done</p>}</div>
       {/* <div>{!item.isOpen && <p>?</p>}</div> */}
-      <div>{!item.isOpen && <p>{item.item}</p>}</div>
+      <div>{item.isOpen && <p>{item.item}</p>}</div>
     </StyledGameItem>
   );
 };
