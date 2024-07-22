@@ -27,11 +27,6 @@ function createPairs(n: number): Pair[] {
   return pairs;
 }
 
-function countOpenItems(array) {
-  let openItems = array.filter((item) => item.isOpen === true);
-  return openItems.length;
-}
-
 const Page = () => {
   const [isStart, setIsStart] = useState(false);
   const [gameItems, setGameItems] = useState<Pair[]>([]);
@@ -42,15 +37,12 @@ const Page = () => {
     setGameItems(pairs);
   };
 
-  // let openCount = useRef<any>(countOpenItems(gameItems));
   let openCount = useRef<number>(0);
 
   let openItem1 = useRef<any>(null);
   let openItem2 = useRef<any>(null);
 
   const onClickHandler = (selectedItem: Pair) => {
-    // if
-
     if (openCount.current === 0 && openItem1.current !== 1) {
       console.log(selectedItem);
       console.log("0");
@@ -127,8 +119,6 @@ const Page = () => {
           openItem2.current = null;
           openCount.current = 0;
         }, 3000);
-
-        // setGameItems(openedTwoNotDoneData);
       }
     }
   }, [gameItems]);

@@ -8,10 +8,10 @@ type Props = {
 };
 
 const StyledGameItem = styled.div`
-  background-color: red;
-  color: white;
+  background-color: var(--color-grey-700);
+  color: var(--color-grey-0);
   width: 10rem;
-  height: 20rem;
+  height: 10rem;
   font-size: 2rem;
   display: flex;
   justify-content: center;
