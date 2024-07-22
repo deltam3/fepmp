@@ -36,6 +36,13 @@ const MediumProblemsList = [
     title: "Memory Game",
     description: "Create a card-matching memory game",
   },
+  {
+    id: 2,
+    link: "/frontendeval/medium/undoablecounter",
+    title: "Undoable Counter",
+    description:
+      "Create a simple counter with a history, and the ability to undo/redo changes",
+  },
 ];
 
 const ProblemList = () => {

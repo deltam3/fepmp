@@ -42,7 +42,7 @@ const MemoryGame = ({ gameItems, setGameItems }: Props) => {
 
   return (
     <>
-      <section>
+      <section className="">
         {isEasy && (
           <StyledEasyLayout>
             {gameItems.map((item) => (
