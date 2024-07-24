@@ -32,18 +32,22 @@ const StyledHistory = styled.div`
 `;
 
 const Page = () => {
-  const [history, setHistory] = useState([
+  const [currentStack, setCurrentStack] = useState([
     { beforeNumber: 0 },
     { inputNumber: 0 },
     { afterNumber: 0 },
   ]);
 
-  const updateCount = (num) => {
-    console.log(num);
-  };
+  const [counterNumber, setCounterNumber] = useState(0);
+  const [wasLastActionUndo, setWasLastActionUndo] = useState(false);
+  const [historyItems, setHistoryItems] = useState([]);
+
+  const updateCount = (inputNumber) => {};
+
+  const updateHistory = (beforeNumber, inputNumber, afterNumber) => {};
 
   return (
-    <main>
+    <main className="flex align-middle justify-center">
       <section className="section-counter">
         <h1 className="font-bold tracking-wide text-gray-700 text-5.2xl leading-tight mb-10 text-center">
           Undoable counter
@@ -68,7 +72,7 @@ const Page = () => {
                 -1
               </Button>
             </div>
-            <StyledCounterNumber>0</StyledCounterNumber>
+            <StyledCounterNumber>{counterNumber}</StyledCounterNumber>
             <div className="flex gap-[2rem]">
               <Button className="btn-plus-1" onClick={() => updateCount(1)}>
                 +1
@@ -83,7 +87,11 @@ const Page = () => {
           </div>
           <div className="history-container">
             <StyledHistoryHeading>History</StyledHistoryHeading>
-            <StyledHistory></StyledHistory>
+            <StyledHistory>
+              {historyItems.map((item) => (
+                <p key={item}>cool</p>
+              ))}
+            </StyledHistory>
           </div>
         </StyledCounter>
       </section>
