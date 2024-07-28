@@ -42,9 +42,28 @@ const Page = () => {
   const [wasLastActionUndo, setWasLastActionUndo] = useState(false);
   const [historyItems, setHistoryItems] = useState([]);
 
-  const updateCount = (inputNumber) => {};
+  const updateCount = (inputNumber: number) => {
+    setWasLastActionUndo(false);
+    let beforeNumber = historyItems[historyItems.length - 1].afterNumber;
+    let afterNumber =
+      historyItems[historyItems.length - 1].afterNumber + inputNumber;
+    setCounterNumber(afterNumber);
 
-  const updateHistory = (beforeNumber, inputNumber, afterNumber) => {};
+    updateHistory(beforeNumber, inputNumber, afterNumber);
+
+    let historyObject = {
+      beforeNumber: beforeNumber,
+      inputNumber: inputNumber,
+      afterNumber: afterNumber,
+    };
+
+    updateHistory(historyObject);
+  };
+
+  const updateHistory = ({ beforeNumber, inputNumber, afterNumber }) => {
+    const newStack = [beforeNumber, inputNumber, afterNumber];
+    setCurrentStack(newStack);
+  };
 
   return (
     <main className="flex align-middle justify-center">
