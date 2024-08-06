@@ -47,12 +47,14 @@ const MediumProblemsList = [
 
 const ProblemList = () => {
   return (
-    <div>
+    <div className="flex flex-col gap-[3rem]">
+      <h2 className="font-bold lg:text-3xl">Easy 문제들</h2>
       <ul className="grid grid-cols-3 gap-[1.6rem]">
         {ProblemsList.map((item) => {
           return <ProblemItem key={item.id} item={item}></ProblemItem>;
         })}
       </ul>
+      <h2 className="font-bold lg:text-3xl">Medium 문제들</h2>
       <ul className="grid grid-cols-3 gap-[1.6rem]">
         {MediumProblemsList.map((item) => {
           return <ProblemItem key={item.id} item={item}></ProblemItem>;
