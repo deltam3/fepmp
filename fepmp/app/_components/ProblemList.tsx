@@ -43,6 +43,12 @@ const MediumProblemsList = [
     description:
       "Create a simple counter with a history, and the ability to undo/redo changes",
   },
+  {
+    id: 3,
+    link: "/frontendeval/medium/shoppinglist",
+    title: "Shopping list",
+    description: "Create a shopping list app with autocomplete item entry",
+  },
 ];
 
 const ProblemList = () => {
