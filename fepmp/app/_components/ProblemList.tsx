@@ -49,6 +49,12 @@ const MediumProblemsList = [
     title: "Shopping list",
     description: "Create a shopping list app with autocomplete item entry",
   },
+  {
+    id: 4,
+    link: "/frontendeval/medium/debounce",
+    title: "Debounce",
+    description: "Implement a barebones debounce function",
+  },
 ];
 
 const ProblemList = () => {
