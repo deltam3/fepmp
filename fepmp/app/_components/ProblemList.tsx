@@ -55,6 +55,12 @@ const MediumProblemsList = [
     title: "Debounce",
     description: "Implement a barebones debounce function",
   },
+  {
+    id: 5,
+    link: "/frontendeval/medium/rollingdice",
+    title: "Rolling dice",
+    description: "Create a dice roller for your next emergency Yahtzee game",
+  },
 ];
 
 const ProblemList = () => {
