@@ -61,6 +61,12 @@ const MediumProblemsList = [
     title: "Rolling dice",
     description: "Create a dice roller for your next emergency Yahtzee game",
   },
+  {
+    id: 6,
+    link: "/frontendeval/medium/analogclock",
+    title: "Analog Clock",
+    description: "Create a working analog clock",
+  },
 ];
 
 const ProblemList = () => {
