@@ -67,6 +67,12 @@ const MediumProblemsList = [
     title: "Analog Clock",
     description: "Create a working analog clock",
   },
+  {
+    id: 7,
+    link: "/frontendeval/medium/multistepform",
+    title: "Multi-step form",
+    description: "Create a single submittable form that spans multiple screens",
+  },
 ];
 
 const ProblemList = () => {
