@@ -73,6 +73,12 @@ const MediumProblemsList = [
     title: "Multi-step form",
     description: "Create a single submittable form that spans multiple screens",
   },
+  {
+    id: 8,
+    link: "/frontendeval/medium/twofactorcodeinput",
+    title: "Two-factor code input",
+    description: "Build a usable multi-field code input",
+  },
 ];
 
 const ProblemList = () => {
