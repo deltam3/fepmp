@@ -79,6 +79,12 @@ const MediumProblemsList = [
     title: "Two-factor code input",
     description: "Build a usable multi-field code input",
   },
+  {
+    id: 9,
+    link: "/frontendeval/medium/imagecarousel",
+    title: "Image Carousel",
+    description: "Build an auto-playing image carousel",
+  },
 ];
 
 const ProblemList = () => {
