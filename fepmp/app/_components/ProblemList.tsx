@@ -85,6 +85,13 @@ const MediumProblemsList = [
     title: "Image Carousel",
     description: "Build an auto-playing image carousel",
   },
+  {
+    id: 10,
+    link: "/frontendeval/medium/histogramchart",
+    title: "Data fetching and visualization",
+    description:
+      "Build a histogram chart from a list of randomly-generated numbers",
+  },
 ];
 
 const ProblemList = () => {
