@@ -8,22 +8,22 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
     path: "/",
     icon: <Icon icon="lucide:home" width="24" height="24" />,
   },
-  {
-    title: "Projects",
-    path: "/projects",
-    icon: <Icon icon="lucide:folder" width="24" height="24" />,
-    submenu: true,
-    subMenuItems: [
-      { title: "All", path: "/projects" },
-      { title: "Notion", path: "/projects/Notion" },
-      { title: "Todo", path: "/projects/Todo" },
-    ],
-  },
-  {
-    title: "Components",
-    path: "/components",
-    icon: <Icon icon="lucide:component" width="24" height="24" />,
-  },
+  // {
+  //   title: "Projects",
+  //   path: "/projects",
+  //   icon: <Icon icon="lucide:folder" width="24" height="24" />,
+  //   submenu: true,
+  //   subMenuItems: [
+  //     { title: "All", path: "/projects" },
+  //     { title: "Notion", path: "/projects/Notion" },
+  //     { title: "Todo", path: "/projects/Todo" },
+  //   ],
+  // },
+  // {
+  //   title: "Components",
+  //   path: "/components",
+  //   icon: <Icon icon="lucide:component" width="24" height="24" />,
+  // },
   {
     title: "FEEval",
     path: "/frontendeval",
@@ -31,9 +31,9 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
     submenu: true,
     subMenuItems: [
       { title: "All", path: "/frontendeval/" },
-      { title: "Easy", path: "/frontendeval/easy/" },
-      { title: "Medium", path: "/frontendeval/medium" },
-      { title: "Hard", path: "/frontendeval/hard" },
+      // { title: "Easy", path: "/frontendeval/easy/" },
+      // { title: "Medium", path: "/frontendeval/medium" },
+      // { title: "Hard", path: "/frontendeval/hard" },
     ],
   },
 ];
