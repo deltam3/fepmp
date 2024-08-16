@@ -23,7 +23,7 @@ const CountDownTimer = (props: Props) => {
     <div>
       <div>
         <ul>
-          <li>
+          {/* <li>
             <p style={{ textDecoration: "line-through" }}>
               Timer Sound & Reset and the time is up
             </p>
@@ -41,12 +41,12 @@ const CountDownTimer = (props: Props) => {
             </p>
             <p>
               Bug Fix: When the timer is set to less than 1 minute the timer
-              doesn't work correctly
+              doesnt work correctly
             </p>
           </li>
           <li>
             <p style={{ textDecoration: "line-through" }}>Fix the design</p>
-          </li>
+          </li> */}
         </ul>
       </div>
 
