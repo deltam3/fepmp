@@ -43,8 +43,7 @@ const Header = () => {
             className="flex flex-row space-x-3 items-center justify-center md:hidden"
           >
             <span className="h-7 w-7 bg-zinc-300 rounded-lg" />
-            <span className="h-7 w-7">🏋️</span>
-            <span className="font-bold text-xl flex ">FePMP111</span>
+            <span className="font-bold text-xl flex ">FePMP</span>
           </Link>
         </div>
 
