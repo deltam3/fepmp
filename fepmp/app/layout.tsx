@@ -39,8 +39,8 @@ export default function RootLayout({
               <SideNav />
               <main className="flex-1">
                 <MarginWidthWrapper>
-                  <Header />
-                  <HeaderMobile />
+                  {/* <Header />
+                  <HeaderMobile /> */}
                   <PageWrapper>{children}</PageWrapper>
                 </MarginWidthWrapper>
               </main>
