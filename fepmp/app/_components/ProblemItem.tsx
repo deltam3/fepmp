@@ -27,7 +27,7 @@ const StyledProblemItem = styled.li`
   align-items: center;
   padding: 1.6rem;
   gap: 1.6rem;
-  border: 0.8rem solid var(--color-grey-900);
+  border: 0.4rem solid var(--color-grey-900);
 
   &:hover {
     background-color: var(--color-grey-200);
