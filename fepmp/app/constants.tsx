@@ -25,6 +25,11 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
   //   icon: <Icon icon="lucide:component" width="24" height="24" />,
   // },
   {
+    title: "FEPractice",
+    path: "/frontendpractice",
+    icon: <Icon icon="lucide:dog" width="24" height="24" />,
+  },
+  {
     title: "FEEval",
     path: "/frontendeval",
     icon: <Icon icon="lucide:cat" width="24" height="24" />,
